@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+  <style type="text/css">
+        body 
+    {
+    background-image: url('img/fondo.jpg');
+    background-repeat: repeat;
+    background-attachment: fixed
+    }
+  </style>
+</head>
+<body>
+
+<div class="container" ><br>
+  <h2 style="text-align: center;">Registro</h2>
+  <br>
+  <form action="/action_page.php" class="needs-validation" novalidate>
+    <div class="form-group">
+      <label for="uname">Nombre:</label>
+      <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
+      <div class="valid-feedback">Valido.</div>
+      <div class="invalid-feedback">Por favor llena este campo.</div>
+    </div>
+    <div class="form-group">
+      <label for="uname">Apellido:</label>
+      <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
+      <div class="valid-feedback">Valido.</div>
+      <div class="invalid-feedback">Por favor llena este campo.</div>
+    </div>
+     <div class="form-group">
+      <label for="uname">Correo Electrónico:</label>
+      <input type="email" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
+      <div class="valid-feedback">Valido.</div>
+      <div class="invalid-feedback">Por favor llena este campo.</div>
+    </div>
+    <button  class="btn btn-success" data-toggle="modal" data-target="#myModal">Guardar</button>
+  </form>
+</div>
+
+
+
+   <!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Registro exitoso</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          Ahora puedes imprimir tu pulsera .... 
+          <br>
+          <img class="img-fluid" src="img/qr.png">
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" data-dismiss="modal">Imprimir</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+
+<script>
+// Disable form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Get the forms we want to add validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
+
+</body>
+</html>
