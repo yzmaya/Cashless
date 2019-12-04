@@ -1,102 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <title>Registro de Usuarios</title>
-  <meta charset="utf-8">
+  <title>R E C O</title>
+<link rel="stylesheet" type="text/css" href="assets/css/estilo.css">
+
+<meta charset="utf-8">
+ <link rel="shortcut icon" type="image/x-icon" href="images/icono.ico">
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-  <style type="text/css">
-        body 
-    {
-    background-image: url('img/fondo.jpg');
-    background-repeat: repeat;
-    background-attachment: fixed
-    }
-  </style>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+ 
 </head>
-<body>
+<body style="background-color: #F6F6F6;">
 
-<div class="container col-sm-6" ><br>
-  <h2 style="text-align: center;">Registro</h2>
-  <br>
-  <form action="/action_page.php" class="needs-validation" novalidate>
-    <div class="form-group">
-      <label for="uname">Nombre:</label>
-      <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
-      <div class="valid-feedback">Valido.</div>
-      <div class="invalid-feedback">Por favor llena este campo.</div>
-    </div>
-    <div class="form-group">
-      <label for="uname">Apellido:</label>
-      <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
-      <div class="valid-feedback">Valido.</div>
-      <div class="invalid-feedback">Por favor llena este campo.</div>
-    </div>
-     <div class="form-group">
-      <label for="uname">Correo Electrónico:</label>
-      <input type="email" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
-      <div class="valid-feedback">Valido.</div>
-      <div class="invalid-feedback">Por favor llena este campo.</div>
-    </div>
-    <button  class="btn btn-success" data-toggle="modal" data-target="#myModal">Guardar</button>
-  </form>
+  <div class="container">
+
+  <div class="login-container" id="login_div">
+            <div class=""><h3>REGISTRO</h3></div>
+            
+            <div class="form-group">
+                  <div class="">
+                    <input type="text" class="form-control" id="nuevo_nombre" placeholder="Nombre" name="" required="">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="">
+                    <input type="text" class="form-control" id="nuevo_apellido" placeholder="Apellido" name="" required="">
+                  </div>
+                </div>
+              
+                <div class="form-group">
+                  <div class="">
+                    <input type="email" class="form-control" id="nuevo_email" placeholder="Correo Electrónico" name="email" required="">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="">          
+                    <input type="password" class="form-control" id="nuevo_pwd" placeholder="Ingresar Contraseña" name="pwd" required="">
+                  </div>
+                </div>
+                <div class="form-group">        
+                  <div class="">
+              
+                    <button  class="btn btn-success" onclick="cuentaNueva()">Iniciar Sesión</button>
+                  </div>
+                </div>
+              
+                
+</div>
+
+ <!-- MODAL PARA REGISTRARSE COMO NUEVO USUARIO  -->
+
+
+
 </div>
 
 
 
-   <!-- The Modal -->
-  <div class="modal fade" id="myModal">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Registro exitoso</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-          Ahora puedes imprimir tu pulsera .... 
-          <br>
-          <img class="img-fluid" src="img/qr.png">
-        </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-info" data-dismiss="modal">Imprimir</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-  
-</div>
-
-
+<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
 <script>
-// Disable form submissions if there are invalid fields
-(function() {
-  'use strict';
-  window.addEventListener('load', function() {
-    // Get the forms we want to add validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-})();
-</script>
+  // Initialize Firebase
+   // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDI6U0vWBHZY0pdkzbQd0NRqpcfY3uPrrk",
+    authDomain: "cashless-c8e7b.firebaseapp.com",
+    databaseURL: "https://cashless-c8e7b.firebaseio.com",
+    projectId: "cashless-c8e7b",
+    storageBucket: "cashless-c8e7b.appspot.com",
+    messagingSenderId: "482722912691",
+    appId: "1:482722912691:web:f8395fd37fef973f7ad3c6",
+    measurementId: "G-QLM4ZSX74X"
 
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  
+</script>
+<script src="js/index.js"></script>
+<script src="js/userinitial.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
