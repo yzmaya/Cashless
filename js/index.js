@@ -7,12 +7,9 @@ firebase.auth().onAuthStateChanged(function(user) {
     var user = firebase.auth().currentUser;
     console.log('usuario autentificado');
     var uid = user.uid;
-    guardarInfo(uid);
    
+        guardarInfo(uid);
 
-
-
-   // window.location.href = 'home.html';
 
     if(user != null){
 
@@ -26,14 +23,28 @@ firebase.auth().onAuthStateChanged(function(user) {
   }
 });
 
-
 var db = firebase.firestore();
 
 
 function cuentaNueva(){
 
+  var newName = document.getElementById('nuevo_nombre').value;
+  var newApel = document.getElementById('nuevo_apellido').value;
+
   var newEmail = document.getElementById('nuevo_email').value;
-  var newPwd = document.getElementById('nuevo_pwd').value;
+  //var newPwd = document.getElementById('nuevo_pwd').value;
+  var newPwd = 'admin1';
+
+  if(newName == ''){
+    alert('llena los campos faltantes');
+    $("#nuevo_nombre").focus();
+
+    
+  }else if(newApel == ''){
+    alert('llena los campos faltantes');
+    $("#nuevo_apellido").focus();
+  }else{
+
 
   firebase.auth().createUserWithEmailAndPassword(newEmail, newPwd).catch(function(error) {
   // Handle Errors here.
@@ -44,14 +55,39 @@ function cuentaNueva(){
   // ...
 
   window.alert(errorMessage);
+  $("#nuevo_email").focus();
 });
 
+//aqui termina else
+ };
 
 }
 
 
 
+function guardarInfo(id){
+  var nom = document.getElementById("nuevo_nombre").value;
+  var apel = document.getElementById("nuevo_apellido").value;
 
+ db.collection('users').doc(""+id+"").set({
+          fnombre: nom,
+          fapellido: apel
+          
+      })
+      .then(function(docRef) {
+        //  console.log("Document written with ID: ", docRef.perfil);
+        document.getElementById("nuevo_nombre").value = '';
+        document.getElementById("nuevo_apellido").value = ''; 
+        document.getElementById("nuevo_email").value = '';
+        window.location.href = 'monitor.html';
+
+      })
+      .catch(function(error) {
+          console.error("Error adding document: ", error);
+      });
+
+
+};
 
 
 // Añadir un listener en tiempo real
