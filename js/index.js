@@ -79,7 +79,9 @@ function guardarInfo(id){
         document.getElementById("nuevo_nombre").value = '';
         document.getElementById("nuevo_apellido").value = ''; 
         document.getElementById("nuevo_email").value = '';
-        window.location.href = 'monitor.html';
+       // window.location.href = 'monitor.html';
+       document.getElementById("item_txt").value = id;
+       $("#item_txt").focus();
 
       })
       .catch(function(error) {

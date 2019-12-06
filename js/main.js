@@ -1,7 +1,7 @@
 var miCodigoQR = new QRCode("codigoQR");
 
-$(document).ready(function(){
-	$("#generarCodigo").on("click",function(){
+
+function hola() {
 		var cadena = $("#item_txt").val();
 		if (cadena == "") {
 		    alert("Ingresa un texto");
@@ -10,7 +10,10 @@ $(document).ready(function(){
 			$("#descargarCodigo").css("display","inline-block");
 			miCodigoQR.makeCode(cadena);
 		}
-	});
+	};
+
+$(document).ready(function(){
+	
 
 	$("#descargarCodigo").on("click",function(){
 		var base64 = $("#codigoQR img").attr('src');
