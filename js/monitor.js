@@ -74,8 +74,8 @@ db.collection('users').get().then(function(querySnapshot) {
           tabla.innerHTML += `
                   <tr> 
                     <td id='${conteo}'>${doc.id}</td>
-                    <td>${doc.data().fnombre}</td>
-                    <td>${doc.data().fapellido}</td>
+                    <td colspan='2'><img class="img-fluid" src='img/logo.png' /></td>
+                    <td>${doc.data().fnombre} ${doc.data().fapellido}</td>
                     <td id='codigoQR${conteo}'></td>
                   </tr>
        ` 
