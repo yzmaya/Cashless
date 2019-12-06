@@ -55,7 +55,7 @@ function mostrarDatos(){
 db.collection("users").get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
         // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
+       // console.log(doc.id, " => ", doc.data());
     });
 });
 
@@ -68,7 +68,7 @@ db.collection('users').get().then(function(querySnapshot) {
 
 
     querySnapshot.forEach(function(doc) {
-      console.log(conteo);
+  //    console.log(conteo);
 
 
           tabla.innerHTML += `
@@ -106,16 +106,13 @@ var i;
 
 
     var miCodigoQR = new QRCode("codigoQR"+i);
-
-    //hola();
      
-    console.log(miCodigoQR);
-    console.log(miid);
+  //  console.log(miCodigoQR);
+    //console.log(miid);
 
 
     hola(miCodigoQR, miid);
   } ;
-//var cadena = $("#item_txt").val();
 };
 
 
@@ -129,3 +126,26 @@ var i;
             qr.makeCode(cadena);
           }
         };
+
+
+//buscar en la tabla
+$(document).ready(function () {
+
+            (function ($) {
+
+                $('#filtrar').keyup(function () {
+
+                    var rex = new RegExp($(this).val(), 'i');
+                  
+                    $('.buscar tr').hide();
+                    $('.buscar tr').filter(function () {
+                        return rex.test($(this).text());
+                          
+                    }).show();
+   
+                });
+
+            }(jQuery));
+             
+
+        });
