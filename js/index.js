@@ -79,9 +79,13 @@ function guardarInfo(id){
         document.getElementById("nuevo_nombre").value = '';
         document.getElementById("nuevo_apellido").value = ''; 
         document.getElementById("nuevo_email").value = '';
+        //***** COMENTA Y DESCOMENTA PARA VER EL MONITOR.HTML *****************************
+      
+        logout();
+
        // window.location.href = 'monitor.html';
-       document.getElementById("item_txt").value = id;
-       $("#item_txt").focus();
+     //  document.getElementById("item_txt").value = id;
+       //$("#item_txt").focus();
 
       })
       .catch(function(error) {
@@ -104,5 +108,7 @@ function guardarInfo(id){
   //});
 
 
-
+function logout(){
+  firebase.auth().signOut();
+}
 
