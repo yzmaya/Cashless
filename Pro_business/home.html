@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>realtiume data</title>
+    <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    h1{
+      text-align: center;
+    }
+    h3{
+      text-align: center;
+    }
+    section #lista{
+      width: 50%
+      max-height: 20vh;
+      overflow-y: scroll;
+      padding-left: 35%;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <div class="well">
+      <h1>Girl's to date </h1>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h3>Write and save the new contact</h3>
+        <p id="ID"></p>
+        
+          
+            <label for="name" class="col-sm-2 control-label">Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="name" placeholder="Nombre">
+            </div>
+            <br><br>
+            <label for="number" class="col-sm-2 control-label">Phone</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="number" placeholder="Number" >
+            </div>
+            <br><br>
+            <div class="col-sm-offset-2 col-sm-10">
+              <button class="btn btn-default" onclick="saveNumber()">Save</button>
+            </div>
+          
+        
+      </div>
+      <div class="col-md-6">
+        <h3>Ladies List</h3>
+        <div id="lista">
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+
+<script>
+    // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDI6U0vWBHZY0pdkzbQd0NRqpcfY3uPrrk",
+    authDomain: "cashless-c8e7b.firebaseapp.com",
+    databaseURL: "https://cashless-c8e7b.firebaseio.com",
+    projectId: "cashless-c8e7b",
+    storageBucket: "cashless-c8e7b.appspot.com",
+    messagingSenderId: "482722912691",
+    appId: "1:482722912691:web:f8395fd37fef973f7ad3c6",
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+
+//const database = firebase.database();
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+
+
+    // User is signed in.
+
+    var user = firebase.auth().currentUser;
+    //console.log('usuario autentificado');
+  //  window.location.href = 'home.html';
+
+    if(user != null){
+console.log('usuario  logueado')
+ var uid = user.uid;
+ document.getElementById('ID').innerHTML = uid;
+    }
+
+  } else {
+    // No user is signed in.
+
+    console.log('usuario no logueado')
+
+  }
+});
+
+  
+
+
+
+function saveNumber() {
+
+  var myid = document.getElementById('ID').innerHTML;
+  console.log(myid);
+var chicas = firebase.database().ref("/provider/" + myid + "");
+
+  var name = $('#name').val();
+  var number = $('#number').val();
+  chicas.push({
+    girl: name,
+      contact:number
+      
+  });
+  var name = $('#name').val('');
+  var number = $('#number').val('');
+}
+
+chicas.on('child_added', function(data) {
+  var numero = data.val().contact;
+  var nombre = data.val().girl;
+
+  $('#lista').prepend('<p> ❤️ ' + nombre + ': ' + numero + '</p>' );
+});
+
+
+</script>
+
+
+<script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+ <!-- <script src="app.js"></script> -->
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+
+</body>
+
+
+
+
+</html>

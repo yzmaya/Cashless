@@ -28,6 +28,8 @@ var db = firebase.firestore();
 
 function cuentaNueva(){
 
+  
+
   var newName = document.getElementById('nuevo_nombre').value;
   var newApel = document.getElementById('nuevo_apellido').value;
 
