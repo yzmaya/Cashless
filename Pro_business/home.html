@@ -102,6 +102,8 @@ firebase.auth().onAuthStateChanged(function(user) {
     if(user != null){
 console.log('usuario  logueado')
  var uid = user.uid;
+
+ mostrarDatos(uid);
  document.getElementById('ID').innerHTML = uid;
     }
 
@@ -121,7 +123,8 @@ function saveNumber() {
 
   var myid = document.getElementById('ID').innerHTML;
   console.log(myid);
-var chicas = firebase.database().ref("/provider/" + myid + "");
+var chicas = firebase.database().ref("/provider/" + myid);
+console.log(chicas);
 
   var name = $('#name').val();
   var number = $('#number').val();
@@ -132,14 +135,27 @@ var chicas = firebase.database().ref("/provider/" + myid + "");
   });
   var name = $('#name').val('');
   var number = $('#number').val('');
+
+
 }
 
-chicas.on('child_added', function(data) {
+
+function mostrarDatos(id){
+
+  var chicas = firebase.database().ref("/provider/" + id);
+
+
+  chicas.on('child_added', function(data) {
   var numero = data.val().contact;
   var nombre = data.val().girl;
 
   $('#lista').prepend('<p> ❤️ ' + nombre + ': ' + numero + '</p>' );
 });
+
+}
+
+
+
 
 
 </script>
