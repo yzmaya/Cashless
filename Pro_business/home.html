@@ -1,81 +1,173 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>Proveedores</title>
   <meta charset="utf-8">
-  <title>realtiume data</title>
-    <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../css/estilo.css">
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.8/vue.min.js"></script>
 
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-  <style>
-    *{
-      margin: 0;
-      padding: 0;
-    }
-    h1{
-      text-align: center;
-    }
-    h3{
-      text-align: center;
-    }
-    section #lista{
-      width: 50%
-      max-height: 20vh;
-      overflow-y: scroll;
-      padding-left: 35%;
-    }
-  </style>
 </head>
-<body>
-  <section>
-    <div class="well">
-      <h1>Girl's to date </h1>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+
+
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#myPage">Logo</a>
+      <span id="myid"></span>
     </div>
-    <div class="row">
-      <div class="col-md-6">
-        <h3>Write and save the new contact</h3>
-        <p id="ID"></p>
-        
-          
-            <label for="name" class="col-sm-2 control-label">Name</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="name" placeholder="Nombre">
-            </div>
-            <br><br>
-            <label for="number" class="col-sm-2 control-label">Phone</label>
-            <div class="col-sm-10">
-              <input type="number" class="form-control" id="number" placeholder="Number" >
-            </div>
-            <br><br>
-            <div class="col-sm-offset-2 col-sm-10">
-              <button class="btn btn-default" onclick="saveNumber()">Save</button>
-            </div>
-          
-        
-      </div>
-      <div class="col-md-6">
-        <h3>Ladies List</h3>
-        <div id="lista">
-          
-        </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="index.html" target="_blank">WEB</a></li>
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> MI CUENTA <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#" style=" background-color: black;"><span class="glyphicon glyphicon-user"></span> REGISTRARSE</a></li>
+      <li><a href="#" style=" background-color: black;"><span class="glyphicon glyphicon-log-in"></span> INICIAR SESIÓN</a></li>
+        </ul>
+      </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
+<!-- Container (About Section) -->
+<div id="about" class="container-fluid">
+  <div class="row">
+<h1>Agregar a Catalogo</h1>
+<div class="col-sm-4" id="app">
+<form class="form-horizontal" action="" @submit.prevent="enviarMensaje">
+    
+    <div class="form-group">
+      <label class="control-label col-sm-2">Categoria:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Basico / De Lujo" v-model="categoria">
       </div>
     </div>
-  </section>
+    <div class="form-group">
+    <label class="control-label col-sm-2">Producto:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Nombre Completo del Producto" v-model="nombre">
+      </div>
+    </div>
+    <div class="form-group">
+    <label class="control-label col-sm-2">Cantidad:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Cantidad de Piezas a Inventario" v-model="piezas">
+      </div>
+    </div>
+    <div class="form-group">
+    <label class="control-label col-sm-2">Precio:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Precio" v-model="precio">
+      </div>
+    </div>
+    <div class="form-group">
+    <label class="control-label col-sm-2">Detalles del Producto:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Peso, Medidas, Tipo de Material" v-model="detalles">
+      </div>
+    </div>
+    
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-success">Agregar</button>
+      </div>
+    </div>
+  </form>
+    <pre>{{$data}}</pre>
+    </div>
+  
 
 
 
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-auth.js"></script>
+<!-- DIV DE INSTANCIA 2 DE VUE ++++++++++++++++++++++++++++++++++++++++++++++-->
+
+ <div class="col-sm-8" id="app2">
+      <h2>Base de Datos</h2>
+      <table class="table table-hover">
+    <thead>
+      <tr  class="info">
+        <th>Categoria</th>
+        <th>Nombre del Producto</th>
+        <th>Piezas</th>
+        <th>Precio</th>
+        <th>Detalles</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody v-for="mensaje in mensajes">
+      <tr>
+        <td contenteditable="true" @blur="editarCategoria($event, mensaje.key)" id="test">{{mensaje.vcategoria}}</td>
+        <td contenteditable="true" @blur="editarNombre($event, mensaje.key)">{{mensaje.nombre}}</td>
+        <td contenteditable="true" @blur="editarPiezas($event, mensaje.key)">{{mensaje.piezas}}</td>
+        <td contenteditable="true" @blur="editarPrecio($event, mensaje.key)">{{mensaje.precio}}</td>
+        <td contenteditable="true" @blur="editarDetalles($event, mensaje.key)">{{mensaje.detalles}}</td>
+        <td><button @click="eliminarMensaje(mensaje.key)" class="glyphicon glyphicon-trash"></button></td>
+      </tr>
+      
+    </tbody>
+  </table>
+     <pre>{{$data}}</pre>
+     
+    </div>
+
+
+
+  </div>
+</div>
+
+
+<!-- 
+<div class="container-fluid bg-grey">
+  <div class="row">
+    <div class="col-sm-4">
+     
+    </div>
+    <div class="col-sm-8">
+      <h2>NUESTROS VALORES</h2><br>
+      <h4><strong>MISSION:</strong> Our mission lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4><br>
+    </div>
+  </div>
+</div> -->
+
+
+
+
+<footer class="container-fluid text-center">
+  <a href="#myPage" title="To Top">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a>
+  <p>Mi empresa Copyright 2017</p>
+</footer>
+
+
+
+<!-- AQUI EMPIEZA SCERIPT DE VUE AND FIREBASE-->
+<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-
-
 <script>
-    // Your web app's Firebase configuration
-  var firebaseConfig = {
+  // Initialize Firebase
+  var config = {
     apiKey: "AIzaSyDI6U0vWBHZY0pdkzbQd0NRqpcfY3uPrrk",
     authDomain: "cashless-c8e7b.firebaseapp.com",
     databaseURL: "https://cashless-c8e7b.firebaseio.com",
@@ -83,12 +175,11 @@
     storageBucket: "cashless-c8e7b.appspot.com",
     messagingSenderId: "482722912691",
     appId: "1:482722912691:web:f8395fd37fef973f7ad3c6",
+    measurementId: "G-QLM4ZSX74X"
   };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(config);
 
 
-//const database = firebase.database();
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
 
@@ -96,86 +187,138 @@ firebase.auth().onAuthStateChanged(function(user) {
     // User is signed in.
 
     var user = firebase.auth().currentUser;
-    //console.log('usuario autentificado');
-  //  window.location.href = 'home.html';
+    console.log('usuario autentificado');
+    var uid = user.uid;
+    //document.getElementById("myid").innerHTML = uid;
+    localStorage.setItem('uiid', uid);
+    
 
     if(user != null){
-console.log('usuario  logueado')
- var uid = user.uid;
-
- mostrarDatos(uid);
- document.getElementById('ID').innerHTML = uid;
+ 
     }
 
   } else {
     // No user is signed in.
 
-    console.log('usuario no logueado')
-
+    console.log('usuario no logueadox')
+window.location.href = 'index.html';
   }
 });
 
+
+  var valor = localStorage.getItem('uiid');
+console.log(valor);
+
+
+
+
+  const db = firebase.database();
+
+
+// ++++++++++++++++++++++++++ INSTANCIA 1 ++++++++++++++++++++++++++++++++++++++++++++++
+const vm =   new Vue({
+
+        el: '#app',
+        data: {
+          categoria: null,
+        nombre: null,
+        piezas: 0,
+        precio: 0,
+        detalles: null,
+        mensajes: [],
+        },
+        methods: {
+          enviarMensaje(){
+          db.ref('/users/'+valor)
+          .push({
+            categoria: this.categoria,
+            nombre: this.nombre,
+            piezas: this.piezas,
+            precio: this.precio,
+            detalles: this.detalles,
+            
+          })
+          .then((data) => {
+            //Aqui borro lo que tiene el formulario y envio a consola el key de firebase
+            this.categoria = '';
+            this.nombre = '';
+            this.piezas = '';
+            this.precio = '';
+            this.detalles = '';
+
+            console.log(data.key);
+          });
+
+        }
+        }
   
+      });
 
-
-
-function saveNumber() {
-
-  var myid = document.getElementById('ID').innerHTML;
-  console.log(myid);
-var chicas = firebase.database().ref("/provider/" + myid);
-console.log(chicas);
-
-  var name = $('#name').val();
-  var number = $('#number').val();
-  chicas.push({
-    girl: name,
-      contact:number
-      
-  });
-  var name = $('#name').val('');
-  var number = $('#number').val('');
-
-
-}
-
-
-function mostrarDatos(id){
-
-  var chicas = firebase.database().ref("/provider/" + id);
-
-
-  chicas.on('child_added', function(data) {
-  var numero = data.val().contact;
-  var nombre = data.val().girl;
-
-  $('#lista').prepend('<p> ❤️ ' + nombre + ': ' + numero + '</p>' );
+// ++++++++++++++++++++++++++ INSTANCIA 2 ++++++++++++++++++++++++++++++++++++++++++++++
+const vm2 = new Vue({
+  el: '#app2',
+  created(){
+          db.ref('/users/'+valor)
+            .on('value', snapshot => this.cargarMensajes(snapshot.val()))
+        },
+  data: {
+    mensajes: [],
+  },
+  methods: {
+    cargarMensajes(mensajes){
+          this.mensajes = [];
+            for (let key in mensajes){
+              
+              this.mensajes.push({
+                vcategoria: mensajes[key].categoria,
+                nombre: mensajes[key].nombre,
+                piezas: mensajes[key].piezas,
+                precio: mensajes[key].precio,
+                detalles: mensajes[key].detalles,
+                key: key,
+              });
+            }
+        },
+        editarCategoria(mensaje, key){
+          db.ref('/users/'+valor+'/' + key).update({
+            categoria: mensaje.target.innerHTML,
+          });
+        },
+        editarNombre(mensaje, key){
+          db.ref('/users/'+valor+'/' + key).update({
+            nombre: mensaje.target.innerHTML,
+          });
+        },
+        editarPiezas(mensaje, key){
+          db.ref('/users/'+valor+'/' + key).update({
+            piezas: mensaje.target.innerHTML,
+          });
+        },
+        editarPrecio(mensaje, key){
+          db.ref('/users/'+valor+'/' + key).update({
+            precio: mensaje.target.innerHTML,
+          });
+        },
+        editarDetalles(mensaje, key){
+          db.ref('/users/'+valor+'/' + key).update({
+            detalles: mensaje.target.innerHTML,
+          });
+        },
+        eliminarMensaje(key){
+          if(confirm('seguro?'))
+            db.ref('/users/'+valor+'/' + key).remove();
+        }
+  }
 });
-
-}
-
-
 
 
 
 </script>
 
 
-<script
-    src="https://code.jquery.com/jquery-3.1.1.min.js"
-    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-    crossorigin="anonymous"></script>
- <!-- <script src="app.js"></script> -->
-
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-
-
+<script type="text/javascript" src="JS/default.js"></script>
+<!-- esto funciona para usar la consola de vue-->
+<script src="https://unpkg.com/vue@2.5.8/dist/vue.js"></script>
 
 </body>
-
-
-
-
 </html>
