@@ -1,0 +1,57 @@
+{
+  "users" : {
+    "DL3K4RUNFLWK4YRN" : [ null, {
+      "AAA" : "E",
+      "AAAX" : 2,
+      "CATEGORIA" : "A"
+    }, {
+      "22" : 2222,
+      "44" : 444,
+      "333" : 333,
+      "AA" : "AA"
+    } ],
+    "e9xGn7epsAODRMJVanb8KPMebFc2" : {
+      "-Lw_p-Vxi0VMzlSaPcM-" : {
+        "categoria" : "111sseeee",
+        "detalles" : "unoaaaaaasaas",
+        "nombre" : "222aasserer",
+        "piezas" : "011aaasaaas",
+        "precio" : "011aaaaaaa"
+      },
+      "-Lw_p0EnpgtC-5tiqmPR" : {
+        "categoria" : "22a22s",
+        "detalles" : "qqqssaass",
+        "nombre" : "3333qsqasa",
+        "piezas" : "aassaasa",
+        "precio" : "sqqaaaas"
+      },
+      "-Lw_rfQpRuEumO26S-wG" : {
+        "categoria" : "11",
+        "nombre" : "11",
+        "piezas" : 0,
+        "precio" : 0
+      },
+      "-Lw_rgNBShynfmVlZdY4" : {
+        "categoria" : "aa",
+        "detalles" : "1",
+        "nombre" : "bbb",
+        "piezas" : "1",
+        "precio" : "1"
+      },
+      "-Lw_rh4Yzh6zgHvAgm8z" : {
+        "categoria" : "cc",
+        "detalles" : "",
+        "nombre" : "cccs",
+        "piezas" : "s",
+        "precio" : ""
+      },
+      "-Lw_rhiJD6IXKjdzKODY" : {
+        "categoria" : "ddd",
+        "detalles" : "s",
+        "nombre" : "eees",
+        "piezas" : "s",
+        "precio" : "s"
+      }
+    }
+  }
+}

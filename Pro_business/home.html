@@ -103,6 +103,7 @@
 
  <div class="col-sm-8" id="app2">
       <h2>Base de Datos</h2>
+      <input type="text" id="filtrar" class="form-control col-6-sm" placeholder="Buscar ...">
       <table class="table table-hover">
     <thead>
       <tr  class="info">
@@ -114,7 +115,7 @@
         <th>Eliminar</th>
       </tr>
     </thead>
-    <tbody v-for="mensaje in mensajes">
+    <tbody v-for="mensaje in mensajes" class="buscar">
       <tr>
         <td contenteditable="true" @blur="editarCategoria($event, mensaje.key)" id="test">{{mensaje.vcategoria}}</td>
         <td contenteditable="true" @blur="editarNombre($event, mensaje.key)">{{mensaje.nombre}}</td>
@@ -312,7 +313,26 @@ const vm2 = new Vue({
 });
 
 
+$(document).ready(function () {
 
+            (function ($) {
+
+                $('#filtrar').keyup(function () {
+
+                    var rex = new RegExp($(this).val(), 'i');
+                  
+                    $('.buscar tr').hide();
+                    $('.buscar tr').filter(function () {
+                        return rex.test($(this).text());
+                          
+                    }).show();
+   
+                });
+
+            }(jQuery));
+             
+
+        });
 </script>
 
 
