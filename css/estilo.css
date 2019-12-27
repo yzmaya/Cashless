@@ -1,3 +1,20 @@
+.image-upload > input
+{
+    display: none;
+}
+
+.image-upload img
+{
+    width: 40px;
+    cursor: pointer;
+}
+ #uploader {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 50%;
+        margin-bottom: 10px;
+      }
+
  body {
       font: 400 15px Lato, sans-serif;
       line-height: 1.8;

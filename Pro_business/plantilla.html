@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>Proveedores</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../css/estilo.css">
+ 
+
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+
+
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#myPage">Logo</a>
+      <span id="myid"></span>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+       
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> MI CUENTA <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="home.html"  style=" background-color: black;"><span class="glyphicon glyphicon-book"></span> Catálogo de productos</a></li>
+           <li><a href="cashless.html"  style=" background-color: black;"><span class="glyphicon glyphicon-qrcode"></span>Cashless</a></li>
+      <li><a href="#" onclick="logout()" style=" background-color: black;"><span class="glyphicon glyphicon-user"></span> Cerrar Sesión</a></li>
+        </ul>
+      </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <br><br>
+  <h1>Sube tu archivo plantilla.xlsm</h1>
+  <span>Si aún no lo tienes, descargalo <a href="../img/plantilla.xlsm" target="_blank">aquí</a></span>
+  <br><br><br>
+  <div class="col-12" id="imagenes">
+   <input type="file" accept="xlsm" value="upload" id="fileButton" size="1" required="" />
+      <progress value="0" max="100" id="uploader">0%</progress>
+  </div>
+<p id="leyenda" style="display: none; color: green;">Tu archivo, se ha enviado exitosamente!</p>
+</div>
+
+
+
+
+<!-- Container (About Section) -->
+
+
+<!-- AQUI EMPIEZA SCERIPT DE VUE AND FIREBASE-->
+<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-storage.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDI6U0vWBHZY0pdkzbQd0NRqpcfY3uPrrk",
+    authDomain: "cashless-c8e7b.firebaseapp.com",
+    databaseURL: "https://cashless-c8e7b.firebaseio.com",
+    projectId: "cashless-c8e7b",
+    storageBucket: "cashless-c8e7b.appspot.com",
+    messagingSenderId: "482722912691",
+    appId: "1:482722912691:web:f8395fd37fef973f7ad3c6",
+    measurementId: "G-QLM4ZSX74X"
+  };
+  firebase.initializeApp(config);
+
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+
+
+    // User is signed in.
+
+    var user = firebase.auth().currentUser;
+    console.log('usuario autentificado');
+    var uid = user.uid;
+    //document.getElementById("myid").innerHTML = uid;
+    localStorage.setItem('uiid', uid);
+    
+    ver();
+
+    if(user != null){
+ 
+    }
+
+  } else {
+    // No user is signed in.
+
+    console.log('usuario no logueadox')
+window.location.href = 'index.html';
+  }
+});
+
+
+  var valor = localStorage.getItem('uiid');
+
+
+  
+
+
+      
+      // Vigilar selección archivo
+      fileButton.addEventListener('change', function(e) {
+       
+        
+
+        //Obtener archivo
+        var file = e.target.files[0];
+     
+
+        // Crear un storage ref
+var storageRef = firebase.storage().ref();
+
+var agregar = storageRef.child(valor + '/'  + file.name);
+       
+
+        // Subir archivo
+        var task = agregar.put(file);
+
+
+        // Actualizar barra progreso
+        task.on('state_changed',
+
+          function progress(snapshot) {
+            var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            uploader.value = percentage;
+          },
+
+          function error(err) {
+            alert(err);
+
+          },
+
+          function complete() {
+            console.log("archivo enviado");
+            $('#leyenda').show();
+
+}
+  )
+      });
+
+
+function logout(){
+  localStorage.clear();
+  firebase.auth().signOut();
+}
+
+ function ver() {
+
+      if(valor==null){
+         window.location.href = 'home.html';
+        }else{
+          console.log(valor);
+        }
+
+    }
+
+</script>
+
+
+<script type="text/javascript" src="JS/default.js"></script>
+<!-- esto funciona para usar la consola de vue-->
+
+
+</body>
+</html>

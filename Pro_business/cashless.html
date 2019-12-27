@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>Proveedores</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../css/estilo.css">
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.8/vue.min.js"></script>
+
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+
+
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#myPage">Logo</a>
+      <span id="myid"></span>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+       
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> MI CUENTA <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="home.html"  style=" background-color: black;"><span class="glyphicon glyphicon-book"></span> Catálogo de productos</a></li>
+           <li><a href="plantilla.html"  style=" background-color: black;"><span class="glyphicon glyphicon-list-alt"></span> Subir Plantilla</a></li>
+      <li><a href="#" onclick="logout()" style=" background-color: black;"><span class="glyphicon glyphicon-user"></span> Cerrar Sesión</a></li>
+        </ul>
+      </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <br><br>
+ <span>Selecciona los productos a cobrar</span>
+  <div class=" table-responsive" id="app2">
+      <table class="table table-hover">
+        <input type="text" id="filtrar" class="form-control" placeholder="Buscar ...">
+    <thead>
+      <tr style="background-color: #2790B0; color: white;">
+        <th>Nombre del Producto</th>
+        <th>Marca</th>
+        <th>Precio</th>
+        <th>Descripción</th>
+      </tr>
+    </thead>
+    <tbody v-for="mensaje in mensajes" class="buscar" id="marcador">
+      <tr onclick="myFunction(this)" style="cursor: pointer; color: black;">
+        <td class="nombre">{{mensaje.nombre}}</td>
+        <td class="marca">{{mensaje.marca}}</td>
+        <td class="precio">{{mensaje.precio}}</td>
+        <td class="descripcion">{{mensaje.detalles}}</td>
+      </tr>
+      
+    </tbody>
+  </table>
+ <!--    <pre>{{$data}}</pre> -->
+    
+    </div>
+    <button class="btn btn-success" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-qrcode"> </span> Cobrar</button>
+</div>
+
+ <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Pre-cobro</h4>
+        </div>
+        <div class="modal-body">
+          <p>Por favor, revisa si la compra es correcta.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span> Aceptar</button>
+          <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+        </div>
+      </div>
+      
+    </div>  
+  </div>
+  
+
+
+
+<!-- AQUI EMPIEZA SCERIPT DE VUE AND FIREBASE-->
+<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
+
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDI6U0vWBHZY0pdkzbQd0NRqpcfY3uPrrk",
+    authDomain: "cashless-c8e7b.firebaseapp.com",
+    databaseURL: "https://cashless-c8e7b.firebaseio.com",
+    projectId: "cashless-c8e7b",
+    storageBucket: "cashless-c8e7b.appspot.com",
+    messagingSenderId: "482722912691",
+    appId: "1:482722912691:web:f8395fd37fef973f7ad3c6",
+    measurementId: "G-QLM4ZSX74X"
+  };
+  firebase.initializeApp(config);
+
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+
+
+    // User is signed in.
+
+    var user = firebase.auth().currentUser;
+    console.log('usuario autentificado');
+    var uid = user.uid;
+    //document.getElementById("myid").innerHTML = uid;
+    localStorage.setItem('uiid', uid);
+    
+    ver();
+
+    if(user != null){
+ 
+    }
+
+  } else {
+    // No user is signed in.
+
+    console.log('usuario no logueadox')
+window.location.href = 'index.html';
+  }
+});
+
+
+  var valor = localStorage.getItem('uiid');
+
+
+
+
+
+
+
+
+   //document.getElementById('trcolor').style.backgroundColor='gray'
+
+   //  console.log( $(".getValue").text());
+   // const toggle = document.querySelector(".onoffswitch-checkbox");
+
+//const body = document.querySelector("#marcador");
+//const body2 = body.querySelector(".getValue");
+
+
+  //body.style.backgroundColor='orange';
+//console.log(document.getElementById('marcador').getElementsByClassName('getValue'));
+
+
+
+
+     
+        
+
+
+const db = firebase.database();
+
+
+      
+   // ++++++++++++++++++++++++++ INSTANCIA 2 ++++++++++++++++++++++++++++++++++++++++++++++
+const vm2 = new Vue({
+  el: '#app2',
+  created(){
+          db.ref('/users/'+valor)
+            .on('value', snapshot => this.cargarMensajes(snapshot.val()))
+        },
+  data: {
+    mensajes: [],
+  },
+  methods: {
+    cargarMensajes(mensajes){
+          this.mensajes = [];
+            for (let key in mensajes){
+              
+              this.mensajes.push({
+                nombre: mensajes[key].nombre,
+                marca: mensajes[key].marca,
+                precio: mensajes[key].precio,
+                detalles: mensajes[key].detalles,
+                key: key,
+              });
+            }
+        }
+  }
+});
+
+
+function logout(){
+  localStorage.clear();
+  firebase.auth().signOut();
+}
+
+ function ver() {
+
+      if(valor==null){
+         window.location.href = 'home.html';
+        }else{
+          console.log(valor);
+        }
+
+    }
+
+
+$(document).ready(function () {
+
+            (function ($) {
+
+                $('#filtrar').keyup(function () {
+
+                    var rex = new RegExp($(this).val(), 'i');
+                  
+                    $('.buscar tr').hide();
+                    $('.buscar tr').filter(function () {
+                        return rex.test($(this).text());
+                          
+                    }).show();
+   
+                });
+
+            }(jQuery));
+             
+
+        });
+
+
+
+
+$(".getValue").click(function (){
+$(this).text()
+console.log($(this).text());
+});
+
+
+
+function myFunction(x) {
+var numerito = x.rowIndex - 1;
+console.log("Row index is: " + numerito);
+
+
+
+ if(x.id == ''){
+   x.id="good"; 
+   x.style.background="#94BA65" 
+   x.style.color="white" 
+
+var nombre = document.getElementsByClassName('nombre');
+var marca = document.getElementsByClassName('marca');
+var precio = document.getElementsByClassName('precio');
+var descripcion = document.getElementsByClassName('descripcion');
+var colorfondo = document.getElementsByClassName('colortd');
+
+console.log(nombre.item(numerito).innerHTML);
+console.log(descripcion.item(numerito).innerHTML);
+console.log(precio.item(numerito).innerHTML);
+
+
+ }else{
+  x.id=""; 
+  x.style.background="white" 
+   x.style.color="black" 
+ }
+}
+</script>
+
+
+<script type="text/javascript" src="JS/default.js"></script>
+<!-- esto funciona para usar la consola de vue-->
+<script src="https://unpkg.com/vue@2.5.8/dist/vue.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+{
+  "users" : {
+    "5Qwr2tRr6NRfgc8uAvIXoy5MBun1": {
+    "1": {
+      "nombre": "Cerveza artesanal",
+      "precio": "150",
+      "marca": "Minerva Stout",
+      "detalles": "Stout 355 ml"
+    },
+    "2": {
+      "nombre": "Cerveza artesanal",
+      "precio": "80",
+      "marca": "Ocho Reales",
+      "detalles": "Porter 355 ml"
+    },
+    "3": {
+      "nombre": "Cerveza artesanal",
+      "precio": "90",
+      "marca": "Blue Moon",
+      "detalles": "Belgian White Witbier 355 ml"
+    },
+    "4": {
+      "nombre": "Shot Mezcal",
+      "precio": "40",
+      "marca": "Monte Lobos",
+      "detalles": "Espadin Joven Artesanal De 10ml"
+    },
+    "5": {
+      "nombre": "Shot Mezcal",
+      "precio": "45",
+      "marca": "Ojo de tigre",
+      "detalles": "Mezcal artesanal Jóven 750ml"
+    }
+  },
+    "46fONjsohEevL5X5cjVZg231HU53" : {
+      "-LwoALdWzihO1L1MwQxT" : {
+        "detalles" : "a<br>",
+        "nombre" : "aa",
+        "precio" : "a<br>"
+      }
+    },
+    "FpsjHCqnPBQlEgw9nVMxfEQDext1" : {
+      "-LwoCF4AeKPCObUXxW1N" : {
+        "marca" : "q",
+        "nombre" : "q"
+      }
+    },
+    "IWVfS3zh6keTSYQhuaU3Nl357Id2" : {
+      "-LwoB59VkTHq28t_1xnm" : {
+        "detalles" : "1",
+        "marca" : "1",
+        "nombre" : "1",
+        "precio" : "1"
+      }
+    },
+    "SfgoKD8buPhLTcTV3EQT4owOnag1" : {
+      "-LwoEyePY6yq05E6gacc" : {
+        "detalles" : "1",
+        "marca" : "1",
+        "nombre" : "1",
+        "precio" : "1"
+      },
+      "-LwoEzYztUiDGeX5kAqI" : {
+        "detalles" : "2",
+        "marca" : "2",
+        "nombre" : "2",
+        "precio" : "2"
+      }
+    },
+    "WCoQpBRdR6PJ8lDgmHEjNGcc1uL2" : {
+      "-LwoAvVa0uuheFoJ7W2p" : {
+        "detalles" : "1",
+        "marca" : "1",
+        "nombre" : "1",
+        "precio" : "1"
+      },
+      "-LwoAwhCPBsGwd4IYCoZ" : {
+        "detalles" : "2",
+        "marca" : "2",
+        "nombre" : "2",
+        "precio" : "2"
+      }
+    },
+    "bltD37L1dkXgzzTIVkET1QCFytU2" : {
+      "-LwoDPdkNh8t-YZKotID" : {
+        "marca" : "A",
+        "nombre" : "A"
+      }
+    },
+    "c2Fq1E1RQMVTTmSBB2dJWPfiWSg1" : {
+      "-LwoF3fcQU9o6myVcIRL" : {
+        "marca" : "2",
+        "nombre" : "1",
+        "precio" : "3"
+      },
+      "-LwoF4IVLFDfAXesLnAS" : {
+        "detalles" : "1",
+        "marca" : "1",
+        "nombre" : "1",
+        "precio" : "1"
+      }
+    },
+    "e9xGn7epsAODRMJVanb8KPMebFc2" : {
+      "-Lwo2yadHejIilZyqr38" : {
+        "detalles" : "355 ML1",
+        "marca" : "Doom ;S",
+        "nombre" : "Cerveza Artesanal<br>",
+        "precio" : "120 <br>"
+      },
+      "-Lwo3CExHOIwThYml3lY" : {
+        "detalles" : "SS1EWSS",
+        "marca" : "1SSWSSh",
+        "nombre" : "1ASDSSSAA&lt;br&gt;h<br>",
+        "precio" : "1EESSSh"
+      },
+      "-Lwo5uEPsni87LuH4_D3" : {
+        "detalles" : "",
+        "marca" : "aa",
+        "nombre" : "saaa",
+        "precio" : ""
+      },
+      "-Lwo5uQ7DC4xg9obeJHf" : {
+        "detalles" : "",
+        "marca" : "aa",
+        "nombre" : "s",
+        "precio" : ""
+      },
+      "-Lwo5u_XPQklYFhRBJ1l" : {
+        "detalles" : "",
+        "marca" : "aads",
+        "nombre" : "s",
+        "precio" : "ds"
+      },
+      "-Lwo6_jNZS4ruq2KjErW" : {
+        "detalles" : "sds",
+        "marca" : "",
+        "nombre" : "s",
+        "precio" : "dsd"
+      },
+      "-Lwo6_lybRUyKLAdOYZ3" : {
+        "detalles" : "ds",
+        "marca" : "ds",
+        "nombre" : "",
+        "precio" : "ds"
+      },
+      "-Lwo6_ors9uQqK15DCtM" : {
+        "detalles" : "",
+        "marca" : "sds",
+        "nombre" : "dsdsd",
+        "precio" : ""
+      },
+      "-Lwo6_rUWRQfhNPfN7_C" : {
+        "detalles" : "",
+        "marca" : "",
+        "nombre" : "sdd",
+        "precio" : ""
+      }
+    },
+    "jdsIs4M7cVb4NJ07YAI1ldT4urN2" : {
+      "-Lwo8uKehd4GwJYaW21a" : {
+        "detalles" : "111",
+        "marca" : "111",
+        "nombre" : "111",
+        "precio" : "11"
+      }
+    },
+    "oteDZsN2hXh2aeLHlsrjUcNmS7F3" : {
+      "-Lwo8MD8hKhYpDi6kBCp" : {
+        "detalles" : "1",
+        "marca" : "1",
+        "nombre" : "1",
+        "precio" : "1"
+      }
+    },
+    "tySOKFIMbAO460hT3sbfYfyKklw2" : {
+      "-Lwo8bZCiT7EBzwO6MVv" : {
+        "detalles" : "qwqw",
+        "marca" : "q",
+        "nombre" : "qqw",
+        "precio" : "wqw"
+      }
+    }
+  }
+}

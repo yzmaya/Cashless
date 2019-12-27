@@ -31,12 +31,13 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="index.html" target="_blank">WEB</a></li>
+       
     <li class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> MI CUENTA <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#" style=" background-color: black;"><span class="glyphicon glyphicon-user"></span> REGISTRARSE</a></li>
-      <li><a href="#" style=" background-color: black;"><span class="glyphicon glyphicon-log-in"></span> INICIAR SESIÓN</a></li>
+          <li><a href="plantilla.html"  style=" background-color: black;"><span class="glyphicon glyphicon-list-alt"></span> Subir Plantilla</a></li>
+          <li><a href="cashless.html"  style=" background-color: black;"><span class="glyphicon glyphicon-qrcode"></span>Cashless</a></li>
+      <li><a href="#" onclick="logout()" style=" background-color: black;"><span class="glyphicon glyphicon-user"></span> Cerrar Sesión</a></li>
         </ul>
       </li>
       </ul>
@@ -52,16 +53,8 @@
 <!-- Container (About Section) -->
 <div id="about" class="container-fluid">
   <div class="row">
-<h1>Agregar a Catalogo</h1>
 <div class="col-sm-4" id="app">
 <form class="form-horizontal" action="" @submit.prevent="enviarMensaje">
-    
-    <div class="form-group">
-      <label class="control-label col-sm-2">Categoria:</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" placeholder="Basico / De Lujo" v-model="categoria">
-      </div>
-    </div>
     <div class="form-group">
     <label class="control-label col-sm-2">Producto:</label>
       <div class="col-sm-10">
@@ -69,9 +62,9 @@
       </div>
     </div>
     <div class="form-group">
-    <label class="control-label col-sm-2">Cantidad:</label>
+    <label class="control-label col-sm-2">Marca:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" placeholder="Cantidad de Piezas a Inventario" v-model="piezas">
+        <input type="text" class="form-control" placeholder="Marca" v-model="marca">
       </div>
     </div>
     <div class="form-group">
@@ -81,9 +74,9 @@
       </div>
     </div>
     <div class="form-group">
-    <label class="control-label col-sm-2">Detalles del Producto:</label>
+    <label class="control-label col-sm-2">Descripción:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" placeholder="Peso, Medidas, Tipo de Material" v-model="detalles">
+        <input type="text" class="form-control" placeholder="Descripción del producto" v-model="detalles">
       </div>
     </div>
     
@@ -93,7 +86,7 @@
       </div>
     </div>
   </form>
-    <pre>{{$data}}</pre>
+  <!--  <pre>{{$data}}</pre> -->
     </div>
   
 
@@ -101,25 +94,23 @@
 
 <!-- DIV DE INSTANCIA 2 DE VUE ++++++++++++++++++++++++++++++++++++++++++++++-->
 
- <div class="col-sm-8" id="app2">
-      <h2>Base de Datos</h2>
-      <input type="text" id="filtrar" class="form-control col-6-sm" placeholder="Buscar ...">
+ <div class="col-sm-8 table-responsive" id="app2">
+      <span>Detalle de productos</span>
       <table class="table table-hover">
+        <input type="text" id="filtrar" class="form-control" placeholder="Buscar ...">
     <thead>
       <tr  class="info">
-        <th>Categoria</th>
         <th>Nombre del Producto</th>
-        <th>Piezas</th>
+        <th>Marca</th>
         <th>Precio</th>
-        <th>Detalles</th>
+        <th>Descripción</th>
         <th>Eliminar</th>
       </tr>
     </thead>
     <tbody v-for="mensaje in mensajes" class="buscar">
       <tr>
-        <td contenteditable="true" @blur="editarCategoria($event, mensaje.key)" id="test">{{mensaje.vcategoria}}</td>
         <td contenteditable="true" @blur="editarNombre($event, mensaje.key)">{{mensaje.nombre}}</td>
-        <td contenteditable="true" @blur="editarPiezas($event, mensaje.key)">{{mensaje.piezas}}</td>
+        <td contenteditable="true" @blur="editarMarca($event, mensaje.key)">{{mensaje.marca}}</td>
         <td contenteditable="true" @blur="editarPrecio($event, mensaje.key)">{{mensaje.precio}}</td>
         <td contenteditable="true" @blur="editarDetalles($event, mensaje.key)">{{mensaje.detalles}}</td>
         <td><button @click="eliminarMensaje(mensaje.key)" class="glyphicon glyphicon-trash"></button></td>
@@ -127,10 +118,10 @@
       
     </tbody>
   </table>
-     <pre>{{$data}}</pre>
-     
+ <!--    <pre>{{$data}}</pre> -->
+    
     </div>
-
+ <a href="../img/plantilla.xlsm" target="_blank">Descargar plantilla de productos</a>
 
 
   </div>
@@ -157,7 +148,7 @@
   <a href="#myPage" title="To Top">
     <span class="glyphicon glyphicon-chevron-up"></span>
   </a>
-  <p>Mi empresa Copyright 2017</p>
+  <p>Copyright 2020</p>
 </footer>
 
 
@@ -193,6 +184,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     //document.getElementById("myid").innerHTML = uid;
     localStorage.setItem('uiid', uid);
     
+    ver();
 
     if(user != null){
  
@@ -208,9 +200,9 @@ window.location.href = 'index.html';
 
 
   var valor = localStorage.getItem('uiid');
-console.log(valor);
 
 
+  
 
 
   const db = firebase.database();
@@ -221,10 +213,9 @@ const vm =   new Vue({
 
         el: '#app',
         data: {
-          categoria: null,
         nombre: null,
-        piezas: 0,
-        precio: 0,
+        marca: null,
+        precio: null,
         detalles: null,
         mensajes: [],
         },
@@ -232,18 +223,16 @@ const vm =   new Vue({
           enviarMensaje(){
           db.ref('/users/'+valor)
           .push({
-            categoria: this.categoria,
             nombre: this.nombre,
-            piezas: this.piezas,
+            marca: this.marca,
             precio: this.precio,
             detalles: this.detalles,
             
           })
           .then((data) => {
             //Aqui borro lo que tiene el formulario y envio a consola el key de firebase
-            this.categoria = '';
             this.nombre = '';
-            this.piezas = '';
+            this.marca = '';
             this.precio = '';
             this.detalles = '';
 
@@ -271,28 +260,22 @@ const vm2 = new Vue({
             for (let key in mensajes){
               
               this.mensajes.push({
-                vcategoria: mensajes[key].categoria,
                 nombre: mensajes[key].nombre,
-                piezas: mensajes[key].piezas,
+                marca: mensajes[key].marca,
                 precio: mensajes[key].precio,
                 detalles: mensajes[key].detalles,
                 key: key,
               });
             }
         },
-        editarCategoria(mensaje, key){
-          db.ref('/users/'+valor+'/' + key).update({
-            categoria: mensaje.target.innerHTML,
-          });
-        },
         editarNombre(mensaje, key){
           db.ref('/users/'+valor+'/' + key).update({
             nombre: mensaje.target.innerHTML,
           });
         },
-        editarPiezas(mensaje, key){
+        editarMarca(mensaje, key){
           db.ref('/users/'+valor+'/' + key).update({
-            piezas: mensaje.target.innerHTML,
+            marca: mensaje.target.innerHTML,
           });
         },
         editarPrecio(mensaje, key){
@@ -333,6 +316,22 @@ $(document).ready(function () {
              
 
         });
+
+function logout(){
+  localStorage.clear();
+  firebase.auth().signOut();
+}
+
+ function ver() {
+
+      if(valor==null){
+         window.location.href = 'home.html';
+        }else{
+          console.log(valor);
+        }
+
+    }
+
 </script>
 
 
