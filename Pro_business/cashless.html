@@ -49,22 +49,24 @@
   <br><br>
  <span>Selecciona los productos a cobrar</span>
   <div class=" table-responsive" id="app2">
-      <table class="table table-hover">
+      <table class="table table-hover ">
         <input type="text" id="filtrar" class="form-control" placeholder="Buscar ...">
     <thead>
       <tr style="background-color: #2790B0; color: white;">
+        <th>No</th>
         <th>Nombre del Producto</th>
         <th>Marca</th>
-        <th>Precio</th>
         <th>Descripción</th>
+        <th>Precio</th>
       </tr>
     </thead>
     <tbody v-for="mensaje in mensajes" class="buscar" id="marcador">
       <tr onclick="myFunction(this)" style="cursor: pointer; color: black;">
+        <td><input type="number" style="color: black; width: 50px;" class="numerow" maxlength="9" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ></td>
         <td class="nombre">{{mensaje.nombre}}</td>
         <td class="marca">{{mensaje.marca}}</td>
-        <td class="precio">{{mensaje.precio}}</td>
         <td class="descripcion">{{mensaje.detalles}}</td>
+        <td class="precio">${{mensaje.precio}}</td>
       </tr>
       
     </tbody>
@@ -87,6 +89,10 @@
         </div>
         <div class="modal-body">
           <p>Por favor, revisa si la compra es correcta.</p>
+          <p id="visualizar">
+            
+          </p>
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-success" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span> Aceptar</button>
@@ -247,40 +253,98 @@ $(document).ready(function () {
 
 
 
-$(".getValue").click(function (){
-$(this).text()
-console.log($(this).text());
-});
-
+const productos = [];
 
 
 function myFunction(x) {
 var numerito = x.rowIndex - 1;
-console.log("Row index is: " + numerito);
-
+//console.log("Row index is: " + numerito);
 
 
  if(x.id == ''){
    x.id="good"; 
+  
    x.style.background="#94BA65" 
    x.style.color="white" 
 
+var numerow = document.getElementsByClassName('numerow');
 var nombre = document.getElementsByClassName('nombre');
 var marca = document.getElementsByClassName('marca');
 var precio = document.getElementsByClassName('precio');
 var descripcion = document.getElementsByClassName('descripcion');
 var colorfondo = document.getElementsByClassName('colortd');
 
-console.log(nombre.item(numerito).innerHTML);
-console.log(descripcion.item(numerito).innerHTML);
-console.log(precio.item(numerito).innerHTML);
+
+numerow.item(numerito).focus();
+numerow.item(numerito).value = '1';
+//localStorage.setItem('nombre' + numerito, nombre.item(numerito).innerHTML);
+//localStorage.setItem('precio' + numerito, precio.item(numerito).innerHTML);
+
+var a = nombre.item(numerito).innerHTML;
+var b = marca.item(numerito).innerHTML;
+var c = descripcion.item(numerito).innerHTML;
+var d = precio.item(numerito).innerHTML;
+
+lista = a + " " + b + " " + c + " " + d;
+//months.splice(1, 0, 'Feb');
+productos.push(lista);
+//console.log(productos);
+console.log('fila ' + numerito);
+console.log(productos);
+
+
+
+
+
+//console.log(nombre.item(numerito).innerHTML);
 
 
  }else{
   x.id=""; 
+  //var conteo = document.getElementsByName('conteo');
+  //console.log(x.getAttribute("name"));
+   //x.removeAttribute("name");
+
   x.style.background="white" 
    x.style.color="black" 
+var numerow = document.getElementsByClassName('numerow');
+numerow.item(numerito).value = '';
+
+//const index = productos.findIndex(producto => producto === "blueberries");
+var nombre = document.getElementsByClassName('nombre');
+var marca = document.getElementsByClassName('marca');
+var precio = document.getElementsByClassName('precio');
+var descripcion = document.getElementsByClassName('descripcion');
+
+
+
+console.log('fila ' + numerito);
+var a = nombre.item(numerito).innerHTML;
+var b = marca.item(numerito).innerHTML;
+var c = descripcion.item(numerito).innerHTML;
+var d = precio.item(numerito).innerHTML;
+
+lista = a + " " + b + " " + c + " " + d;
+console.log(lista)
+
+const index = productos.findIndex(producto => producto === lista);
+productos.splice(index, 1);
+//console.log(conteo.length);
+
+console.log(productos);
+
+
+//productos.splice(, 1);
+//console.log(productos);
+//console.log(numerito);
+
+//localStorage.removeItem('nombre' + numerito);
+//localStorage.removeItem('precio' + numerito);
+
  }
+
+
+
 }
 </script>
 
