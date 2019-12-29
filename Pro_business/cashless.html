@@ -74,7 +74,7 @@
  <!--    <pre>{{$data}}</pre> -->
     
     </div>
-    <button class="btn btn-success" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-qrcode"> </span> Cobrar</button>
+    <button onclick="activa()" class="btn btn-success" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-qrcode"> </span> Cobrar</button>
 </div>
 
  <!-- Modal -->
@@ -89,14 +89,14 @@
         </div>
         <div class="modal-body">
           <p>Por favor, revisa si la compra es correcta.</p>
-          <p id="visualizar">
+          <div id="mostrar">
             
-          </p>
+          </div>
 
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-success" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span> Aceptar</button>
-          <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+          <button type="button" class="btn btn-warning"  data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
         </div>
       </div>
       
@@ -289,15 +289,6 @@ lista = a + " " + b + " " + c + " " + d;
 //months.splice(1, 0, 'Feb');
 productos.push(lista);
 //console.log(productos);
-console.log('fila ' + numerito);
-console.log(productos);
-
-
-
-
-
-//console.log(nombre.item(numerito).innerHTML);
-
 
  }else{
   x.id=""; 
@@ -331,20 +322,27 @@ const index = productos.findIndex(producto => producto === lista);
 productos.splice(index, 1);
 //console.log(conteo.length);
 
-console.log(productos);
 
-
-//productos.splice(, 1);
-//console.log(productos);
-//console.log(numerito);
-
-//localStorage.removeItem('nombre' + numerito);
-//localStorage.removeItem('precio' + numerito);
 
  }
 
 
+//console.log(productos);
+//productos.forEach(element => console.log(element));
 
+}
+
+
+function activa(){
+  document.getElementById("mostrar").innerHTML = '';
+  console.log('method man');
+  productos.forEach(despliega);
+}
+
+function despliega(item, index) {
+
+  //document.getElementById("mostrar").innerHTML = '';
+  document.getElementById("mostrar").innerHTML += index + ":" + item + "<br>"; 
 }
 </script>
 
