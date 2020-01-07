@@ -254,7 +254,7 @@ $(document).ready(function () {
 
 
 const productos = [];
-
+const totales = [];
 
 function myFunction(x) {
 var numerito = x.rowIndex - 1;
@@ -288,7 +288,9 @@ var d = precio.item(numerito).innerHTML;
 lista = a + " " + b + " " + c + " " + d;
 //months.splice(1, 0, 'Feb');
 productos.push(lista);
-//console.log(productos);
+totales.push(d);
+
+console.log(totales);
 
  }else{
   x.id=""; 
