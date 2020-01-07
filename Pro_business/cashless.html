@@ -66,7 +66,7 @@
         <td class="nombre">{{mensaje.nombre}}</td>
         <td class="marca">{{mensaje.marca}}</td>
         <td class="descripcion">{{mensaje.detalles}}</td>
-        <td class="precio">${{mensaje.precio}}</td>
+        <td class="precio">{{mensaje.precio}}</td>
       </tr>
       
     </tbody>
@@ -290,6 +290,11 @@ lista = a + " " + b + " " + c + " " + d;
 productos.push(lista);
 totales.push(d);
 
+var totalDeuda = 0;
+$(".precio").each(function(){
+  totalDeuda+=parseInt($(this).html()) || 0;
+});
+console.log(totalDeuda);
 console.log(totales);
 
  }else{
