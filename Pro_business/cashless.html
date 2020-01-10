@@ -62,7 +62,7 @@
     </thead>
     <tbody v-for="mensaje in mensajes" class="buscar" id="marcador">
       <tr onclick="myFunction(this)" style="cursor: pointer; color: black;">
-        <td><input type="number" style="color: black; width: 50px;" class="numerow" maxlength="9" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ></td>
+        <td><input type="text" onkeyup="myCantidad(this)" style="color: black; width: 50px;" class="numerow" maxlength="9" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ></td>
         <td class="nombre">{{mensaje.nombre}}</td>
         <td class="marca">{{mensaje.marca}}</td>
         <td class="descripcion">{{mensaje.detalles}}</td>
@@ -95,6 +95,7 @@
 
         </div>
         <div class="modal-footer">
+          <div style="text-align: left; color: red;"><span id="total"></span></div>
           <button type="button" class="btn btn-success" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span> Aceptar</button>
           <button type="button" class="btn btn-warning"  data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
         </div>
@@ -254,7 +255,43 @@ $(document).ready(function () {
 
 
 const productos = [];
-const totales = [];
+
+function myCantidad(z) {
+var cant = z.value;
+
+
+if(cant == ''){
+  console.log('no hay cantidad');
+  var temporal = localStorage.getItem("temporal");
+ var temporal2 = localStorage.getItem("temporal2");
+ var entero = parseInt(temporal2);
+ document.getElementsByClassName('precio')[entero].innerHTML = temporal;
+}else{
+ var temporal = localStorage.getItem("temporal");
+ var temporal2 = localStorage.getItem("temporal2");
+var entero = parseInt(temporal2);
+
+var temptotal = 0;
+temptotal=parseInt(cant) * parseFloat(temporal); 
+
+
+document.getElementsByClassName('precio')[entero].innerHTML = temptotal;
+
+
+console.log(cant);
+console.log(temporal);
+console.log(temptotal);
+console.log(temporal2);
+}
+
+  
+
+
+  }
+
+
+
+
 
 function myFunction(x) {
 var numerito = x.rowIndex - 1;
@@ -263,7 +300,8 @@ var numerito = x.rowIndex - 1;
 
  if(x.id == ''){
    x.id="good"; 
-  
+ 
+
    x.style.background="#94BA65" 
    x.style.color="white" 
 
@@ -271,13 +309,22 @@ var numerow = document.getElementsByClassName('numerow');
 var nombre = document.getElementsByClassName('nombre');
 var marca = document.getElementsByClassName('marca');
 var precio = document.getElementsByClassName('precio');
+var selected = document.getElementsByClassName('precio')[numerito];
 var descripcion = document.getElementsByClassName('descripcion');
 var colorfondo = document.getElementsByClassName('colortd');
+var totalcompra = document.getElementById('total');
 
+
+    selected.className += " MyClass";
 
 numerow.item(numerito).focus();
 numerow.item(numerito).value = '1';
-//localStorage.setItem('nombre' + numerito, nombre.item(numerito).innerHTML);
+console.log(precio);
+
+
+//document.getElementById("MyElement").className = "MyClass";
+localStorage.setItem("temporal", precio.item(numerito).innerHTML);
+localStorage.setItem("temporal2", numerito);
 //localStorage.setItem('precio' + numerito, precio.item(numerito).innerHTML);
 
 var a = nombre.item(numerito).innerHTML;
@@ -288,14 +335,16 @@ var d = precio.item(numerito).innerHTML;
 lista = a + " " + b + " " + c + " " + d;
 //months.splice(1, 0, 'Feb');
 productos.push(lista);
-totales.push(d);
+
 
 var totalDeuda = 0;
-$(".precio").each(function(){
-  totalDeuda+=parseInt($(this).html()) || 0;
+$(".MyClass").each(function(){
+  totalDeuda+=parseFloat($(this).html()) || 0;
+  totalcompra.innerHTML = 'Total a pagar: $'+ totalDeuda;
+
 });
 console.log(totalDeuda);
-console.log(totales);
+
 
  }else{
   x.id=""; 
@@ -306,14 +355,21 @@ console.log(totales);
   x.style.background="white" 
    x.style.color="black" 
 var numerow = document.getElementsByClassName('numerow');
-numerow.item(numerito).value = '';
+
+//numerow.item(numerito).value = '';
 
 //const index = productos.findIndex(producto => producto === "blueberries");
 var nombre = document.getElementsByClassName('nombre');
 var marca = document.getElementsByClassName('marca');
 var precio = document.getElementsByClassName('precio');
 var descripcion = document.getElementsByClassName('descripcion');
+var selected = document.getElementsByClassName('precio')[numerito];
+var totalcompra = document.getElementById('total');
 
+
+numerow.item(numerito).value = '';
+
+selected.className = "precio";
 
 
 console.log('fila ' + numerito);
@@ -324,6 +380,15 @@ var d = precio.item(numerito).innerHTML;
 
 lista = a + " " + b + " " + c + " " + d;
 console.log(lista)
+
+
+var totalDeuda = 0;
+$(".MyClass").each(function(){
+  totalDeuda+=parseFloat($(this).html()) || 0;
+totalcompra.innerHTML = 'Total a pagar: $'+ totalDeuda;
+});
+console.log(totalDeuda);
+
 
 const index = productos.findIndex(producto => producto === lista);
 productos.splice(index, 1);
@@ -342,15 +407,16 @@ productos.splice(index, 1);
 
 function activa(){
   document.getElementById("mostrar").innerHTML = '';
-  console.log('method man');
   productos.forEach(despliega);
 }
 
 function despliega(item, index) {
 
   //document.getElementById("mostrar").innerHTML = '';
-  document.getElementById("mostrar").innerHTML += index + ":" + item + "<br>"; 
+  document.getElementById("mostrar").innerHTML += item + "<br>"; 
 }
+
+
 </script>
 
 
