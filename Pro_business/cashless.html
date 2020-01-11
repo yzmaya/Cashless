@@ -254,43 +254,59 @@ $(document).ready(function () {
 
 
 
-const productos = [];
+
 
 function myCantidad(z) {
 var cant = z.value;
+var otro = document.getElementsByClassName('MyClass');
 
+
+
+console.log(otro)
 
 if(cant == ''){
   console.log('no hay cantidad');
-  var temporal = localStorage.getItem("temporal");
- var temporal2 = localStorage.getItem("temporal2");
- var entero = parseInt(temporal2);
- document.getElementsByClassName('precio')[entero].innerHTML = temporal;
+  
+ //var entero = parseInt(temporal2);
+ //document.getElementsByClassName('precio')[entero].innerHTML = temporal;
 }else{
- var temporal = localStorage.getItem("temporal");
- var temporal2 = localStorage.getItem("temporal2");
-var entero = parseInt(temporal2);
+ //var temporal = localStorage.getItem("temporal");
+ //var temporal2 = localStorage.getItem("temporal2");
+//var entero = parseInt(temporal2);
 
-var temptotal = 0;
-temptotal=parseInt(cant) * parseFloat(temporal); 
-
-
-document.getElementsByClassName('precio')[entero].innerHTML = temptotal;
+//var temptotal = 0;
+//temptotal=parseInt(cant) * parseFloat(temporal); 
 
 
-console.log(cant);
-console.log(temporal);
-console.log(temptotal);
-console.log(temporal2);
+//document.getElementsByClassName('precio')[entero].innerHTML = temptotal;
+
+
+//console.log(cant);
+//console.log(temporal);
+//console.log(temptotal);
+//console.log(temporal2);
+console.log(z)
+
+//todo.forEach(muestra);
 }
 
   
-
-
   }
 
 
 
+function muestra(item, index) {
+
+  //document.getElementById("mostrar").innerHTML = '';
+  //document.getElementById("mostrar").innerHTML += item + "<br>"; 
+  console.log(item);
+}
+
+
+
+
+const productos = [];
+const todo = [];
 
 
 function myFunction(x) {
@@ -335,6 +351,9 @@ var d = precio.item(numerito).innerHTML;
 lista = a + " " + b + " " + c + " " + d;
 //months.splice(1, 0, 'Feb');
 productos.push(lista);
+todo.push(lista, precio.item(numerito).innerHTML, numerito);
+console.log(todo);
+
 
 
 var totalDeuda = 0;
@@ -343,7 +362,7 @@ $(".MyClass").each(function(){
   totalcompra.innerHTML = 'Total a pagar: $'+ totalDeuda;
 
 });
-console.log(totalDeuda);
+//console.log(totalDeuda);
 
 
  }else{
