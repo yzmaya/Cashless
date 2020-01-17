@@ -272,10 +272,9 @@ todo.forEach( function(valor, indice, array) {
     var valorfila = indice - 1;
 
      var isofacto = todo[valorprecio] * cant;
-      var isofacto2 = todo[valorprecio];
+     
     var indicado = todo[valorfila];
 
-    console.log("En el índice " + indice + " tu precio es : " + isofacto2);
    // console.log('el indice de este articulo es ' + valorcito)
    
   
@@ -324,7 +323,7 @@ document.getElementsByClassName('precio')[indicado].innerHTML = isofacto;
 
 
 const todo = [];
-
+const productos = [];
 
 function myFunction(x) {
 var numerito = x.rowIndex - 1;
@@ -370,21 +369,18 @@ var d = precio.item(numerito).innerHTML;
 var conversion = parseFloat(d);
 var x = indicador.item(numerito).innerHTML;
 
-lista = a + " " + b + " " + c + " " + d;
+lista = a + " " + b + " " + c + " " + "$"+d;
 //months.splice(1, 0, 'Feb');
 //productos.push(lista);
 
+productos.push(lista);
 todo.push(lista, conversion, numerito, x);
-console.log(todo);
+//console.log(productos);
 
 
 
-var totalDeuda = 0;
-$(".MyClass").each(function(){
-  totalDeuda+=parseFloat($(this).html()) || 0;
-  totalcompra.innerHTML = 'Total a pagar: $'+ totalDeuda;
 
-});
+
 //console.log(totalDeuda);
 
 
@@ -414,27 +410,23 @@ numerow.item(numerito).value = '';
 selected.className = "precio";
 
 
-console.log('fila ' + numerito);
+//console.log('fila ' + numerito);
 var a = nombre.item(numerito).innerHTML;
 var b = marca.item(numerito).innerHTML;
 var c = descripcion.item(numerito).innerHTML;
 var d = precio.item(numerito).innerHTML;
 
 
-lista = a + " " + b + " " + c + " " + d;
-console.log(lista)
+lista = a + " " + b + " " + c + " " + "$"+d;
+//console.log(lista)
 
 
-var totalDeuda = 0;
-$(".MyClass").each(function(){
-  totalDeuda+=parseFloat($(this).html()) || 0;
-totalcompra.innerHTML = 'Total a pagar: $'+ totalDeuda;
-});
-console.log(totalDeuda);
+
+//console.log(totalDeuda);
 
 
-const index = todo.findIndex(producto => producto === lista);
-todo.splice(index, 1);
+const index = productos.findIndex(producto => producto === lista);
+productos.splice(index, 1);
 //console.log(conteo.length);
 
 
@@ -449,8 +441,18 @@ todo.splice(index, 1);
 
 
 function activa(){
+var totalcompra = document.getElementById('total');
+  var totalDeuda = 0;
+
+  $(".MyClass").each(function(){
+  totalDeuda+=parseFloat($(this).html()) || 0;
+  totalcompra.innerHTML = 'Total a pagar: $'+ totalDeuda;
+
+});
+
+
   document.getElementById("mostrar").innerHTML = '';
-  todo.forEach(despliega);
+  productos.forEach(despliega);
 }
 
 function despliega(item, index) {
