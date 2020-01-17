@@ -62,7 +62,8 @@
     </thead>
     <tbody v-for="mensaje in mensajes" class="buscar" id="marcador">
       <tr onclick="myFunction(this)" style="cursor: pointer; color: black;">
-        <td><input type="text" onkeyup="myCantidad(this)" style="color: black; width: 50px;" class="numerow" maxlength="9" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ></td>
+        <td><input type="text" onkeyup="myCantidad(this)" style="color: black; width: 50px;" class="numerow" :id="mensaje.key" maxlength="9" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ></td>
+        <td style="display: none;" class="llave">fireb{{mensaje.key}}</td>
         <td class="nombre">{{mensaje.nombre}}</td>
         <td class="marca">{{mensaje.marca}}</td>
         <td class="descripcion">{{mensaje.detalles}}</td>
@@ -258,18 +259,41 @@ $(document).ready(function () {
 
 function myCantidad(z) {
 var cant = z.value;
-var otro = document.getElementsByClassName('MyClass');
+var yomero = 'fireb' + z.id;
 
+if(cant==''){
 
+}else{
 
-console.log(otro)
+todo.forEach( function(valor, indice, array) {
 
-if(cant == ''){
-  console.log('no hay cantidad');
+  if(yomero==valor){
+    var valorprecio = indice - 2;
+    var valorfila = indice - 1;
+
+     var isofacto = todo[valorprecio] * cant;
+      var isofacto2 = todo[valorprecio];
+    var indicado = todo[valorfila];
+
+    console.log("En el índice " + indice + " tu precio es : " + isofacto2);
+   // console.log('el indice de este articulo es ' + valorcito)
+   
+  
+
+document.getElementsByClassName('precio')[indicado].innerHTML = isofacto;
+
+  }else{
+
+  }
+
+});
+}
+//if(cant == ''){
+ // console.log('no hay cantidad');
   
  //var entero = parseInt(temporal2);
  //document.getElementsByClassName('precio')[entero].innerHTML = temporal;
-}else{
+//}else{
  //var temporal = localStorage.getItem("temporal");
  //var temporal2 = localStorage.getItem("temporal2");
 //var entero = parseInt(temporal2);
@@ -285,27 +309,20 @@ if(cant == ''){
 //console.log(temporal);
 //console.log(temptotal);
 //console.log(temporal2);
-console.log(z)
+//console.log(todo)
 
 //todo.forEach(muestra);
-}
+//}
 
   
   }
 
 
 
-function muestra(item, index) {
-
-  //document.getElementById("mostrar").innerHTML = '';
-  //document.getElementById("mostrar").innerHTML += item + "<br>"; 
-  console.log(item);
-}
 
 
 
 
-const productos = [];
 const todo = [];
 
 
@@ -331,16 +348,18 @@ var colorfondo = document.getElementsByClassName('colortd');
 var totalcompra = document.getElementById('total');
 
 
+
+var indicador = document.getElementsByClassName('llave');
+
+
     selected.className += " MyClass";
 
 numerow.item(numerito).focus();
 numerow.item(numerito).value = '1';
-console.log(precio);
+
 
 
 //document.getElementById("MyElement").className = "MyClass";
-localStorage.setItem("temporal", precio.item(numerito).innerHTML);
-localStorage.setItem("temporal2", numerito);
 //localStorage.setItem('precio' + numerito, precio.item(numerito).innerHTML);
 
 var a = nombre.item(numerito).innerHTML;
@@ -348,10 +367,14 @@ var b = marca.item(numerito).innerHTML;
 var c = descripcion.item(numerito).innerHTML;
 var d = precio.item(numerito).innerHTML;
 
+var conversion = parseFloat(d);
+var x = indicador.item(numerito).innerHTML;
+
 lista = a + " " + b + " " + c + " " + d;
 //months.splice(1, 0, 'Feb');
-productos.push(lista);
-todo.push(lista, precio.item(numerito).innerHTML, numerito);
+//productos.push(lista);
+
+todo.push(lista, conversion, numerito, x);
 console.log(todo);
 
 
@@ -397,6 +420,7 @@ var b = marca.item(numerito).innerHTML;
 var c = descripcion.item(numerito).innerHTML;
 var d = precio.item(numerito).innerHTML;
 
+
 lista = a + " " + b + " " + c + " " + d;
 console.log(lista)
 
@@ -409,8 +433,8 @@ totalcompra.innerHTML = 'Total a pagar: $'+ totalDeuda;
 console.log(totalDeuda);
 
 
-const index = productos.findIndex(producto => producto === lista);
-productos.splice(index, 1);
+const index = todo.findIndex(producto => producto === lista);
+todo.splice(index, 1);
 //console.log(conteo.length);
 
 
@@ -426,7 +450,7 @@ productos.splice(index, 1);
 
 function activa(){
   document.getElementById("mostrar").innerHTML = '';
-  productos.forEach(despliega);
+  todo.forEach(despliega);
 }
 
 function despliega(item, index) {
