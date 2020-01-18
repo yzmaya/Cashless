@@ -255,31 +255,40 @@ $(document).ready(function () {
 
 
 
-
+const mostrador = [];
 
 function myCantidad(z) {
 var cant = z.value;
 var yomero = 'fireb' + z.id;
 
 if(cant==''){
-
+console.log("nanais");
 }else{
 
-todo.forEach( function(valor, indice, array) {
+todo.forEach( function(valorcin, indice, array) {
 
-  if(yomero==valor){
+  if(yomero==valorcin){
+    //guardamos la variable que indica el precio de mi fila
     var valorprecio = indice - 2;
+    var isofacto = todo[valorprecio] * cant;
+     //guardamos en la variable que indica el indice de mi fila
     var valorfila = indice - 1;
-
-     var isofacto = todo[valorprecio] * cant;
-     
     var indicado = todo[valorfila];
+     //guardamos en la variable listlist lo que viene de mi array
+    var mostrarlista = indice - 3;
+    var listlist = todo[mostrarlista];
+     
+     
+    
 
    // console.log('el indice de este articulo es ' + valorcito)
    
   
 
 document.getElementsByClassName('precio')[indicado].innerHTML = isofacto;
+
+mostrador.push("<strong> " + cant + " </strong> " + listlist  + "<strong> $ " + isofacto + "</strong>");
+console.log(mostrador);
 
   }else{
 
@@ -323,7 +332,7 @@ document.getElementsByClassName('precio')[indicado].innerHTML = isofacto;
 
 
 const todo = [];
-const productos = [];
+
 
 function myFunction(x) {
 var numerito = x.rowIndex - 1;
@@ -354,7 +363,7 @@ var indicador = document.getElementsByClassName('llave');
     selected.className += " MyClass";
 
 numerow.item(numerito).focus();
-numerow.item(numerito).value = '1';
+
 
 
 
@@ -369,11 +378,10 @@ var d = precio.item(numerito).innerHTML;
 var conversion = parseFloat(d);
 var x = indicador.item(numerito).innerHTML;
 
-lista = a + " " + b + " " + c + " " + "$"+d;
+lista = a + " " + b + " " + c + d;
 //months.splice(1, 0, 'Feb');
 //productos.push(lista);
 
-productos.push(lista);
 todo.push(lista, conversion, numerito, x);
 //console.log(productos);
 
@@ -405,7 +413,7 @@ var selected = document.getElementsByClassName('precio')[numerito];
 var totalcompra = document.getElementById('total');
 
 
-numerow.item(numerito).value = '';
+
 
 selected.className = "precio";
 
@@ -415,22 +423,29 @@ var a = nombre.item(numerito).innerHTML;
 var b = marca.item(numerito).innerHTML;
 var c = descripcion.item(numerito).innerHTML;
 var d = precio.item(numerito).innerHTML;
+var x = numerow.item(numerito).value;
 
 
-lista = a + " " + b + " " + c + " " + "$"+d;
+lista = a + " " + b + " " + c + " " + d;
 //console.log(lista)
 
-
+console.log(lista);
+console.log(d);
+console.log(x);
 
 //console.log(totalDeuda);
 
+var lista = "<strong> " + x + " </strong> " + lista  + "<strong> $ " + d + "</strong>";
 
-const index = productos.findIndex(producto => producto === lista);
-productos.splice(index, 1);
+
+const index = mostrador.findIndex(producto => producto === lista);
+mostrador.splice(index, 1);
+
+
 //console.log(conteo.length);
 
 
-
+numerow.item(numerito).value = '';
  }
 
 
@@ -452,12 +467,14 @@ var totalcompra = document.getElementById('total');
 
 
   document.getElementById("mostrar").innerHTML = '';
-  productos.forEach(despliega);
+  mostrador.forEach(despliega);
 }
 
 function despliega(item, index) {
 
   //document.getElementById("mostrar").innerHTML = '';
+
+ 
   document.getElementById("mostrar").innerHTML += item + "<br>"; 
 }
 
