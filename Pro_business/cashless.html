@@ -51,6 +51,7 @@
   <div class=" table-responsive" id="app2">
       <table class="table table-hover ">
         <input type="text" id="filtrar" class="form-control" placeholder="Buscar ...">
+        <p id="peterpan"></p>
     <thead>
       <tr style="background-color: #2790B0; color: white;">
         <th>No</th>
@@ -256,6 +257,7 @@ $(document).ready(function () {
 
 
 const mostrador = [];
+const validar = [];
 
 function myCantidad(z) {
 var cant = z.value;
@@ -265,36 +267,25 @@ if(cant==''){
 console.log("nanais");
 }else{
 
-todo.forEach( function(valorcin, indice, array) {
 
-  if(yomero==valorcin){
-    //guardamos la variable que indica el precio de mi fila
-    var valorprecio = indice - 2;
-    var isofacto = todo[valorprecio] * cant;
-     //guardamos en la variable que indica el indice de mi fila
-    var valorfila = indice - 1;
-    var indicado = todo[valorfila];
-     //guardamos en la variable listlist lo que viene de mi array
-    var mostrarlista = indice - 3;
-    var listlist = todo[mostrarlista];
-     
-     
-    
-
-   // console.log('el indice de este articulo es ' + valorcito)
-   
+for (k in todo){
   
+    if(todo[k].id == yomero){
+                 //   todo[k].cantidad += parseInt(cantidad)
+                  //  encontrado = true;
+                  var multiplicacion = cant * todo[k].preciounidad;
+                  todo[k].preciosuma = multiplicacion;
+                  todo[k].cantidades = cant;
+                  var ubicacion = todo[k].posicion;
 
-document.getElementsByClassName('precio')[indicado].innerHTML = isofacto;
+                  //document.getElementsByClassName('precio')[ubicacion].innerHTML = multiplicacion;
+                  console.log(todo);
+                }
+}
 
-mostrador.push("<strong> " + cant + " </strong> " + listlist  + "<strong> $ " + isofacto + "</strong>");
-console.log(mostrador);
 
-  }else{
 
-  }
 
-});
 }
 //if(cant == ''){
  // console.log('no hay cantidad');
@@ -354,10 +345,10 @@ var selected = document.getElementsByClassName('precio')[numerito];
 var descripcion = document.getElementsByClassName('descripcion');
 var colorfondo = document.getElementsByClassName('colortd');
 var totalcompra = document.getElementById('total');
+numerow.item(numerito).value = '';
 
+var choy = document.getElementsByClassName('llave');
 
-
-var indicador = document.getElementsByClassName('llave');
 
 
     selected.className += " MyClass";
@@ -374,15 +365,26 @@ var a = nombre.item(numerito).innerHTML;
 var b = marca.item(numerito).innerHTML;
 var c = descripcion.item(numerito).innerHTML;
 var d = precio.item(numerito).innerHTML;
+var z = choy.item(numerito).innerHTML;
 
 var conversion = parseFloat(d);
-var x = indicador.item(numerito).innerHTML;
 
-lista = a + " " + b + " " + c + d;
+lista = a + " " + b + " " + c;
+let seleccion = {
+  id: z,
+  detalle: lista,
+  cantidades: 1,
+  preciounidad: conversion,
+  preciosuma: 0,
+  posicion: numerito
+  
+};
+
+
 //months.splice(1, 0, 'Feb');
 //productos.push(lista);
 
-todo.push(lista, conversion, numerito, x);
+todo.push(seleccion);
 //console.log(productos);
 
 
@@ -401,48 +403,33 @@ todo.push(lista, conversion, numerito, x);
   x.style.background="white" 
    x.style.color="black" 
 var numerow = document.getElementsByClassName('numerow');
-
-//numerow.item(numerito).value = '';
-
-//const index = productos.findIndex(producto => producto === "blueberries");
-var nombre = document.getElementsByClassName('nombre');
-var marca = document.getElementsByClassName('marca');
-var precio = document.getElementsByClassName('precio');
-var descripcion = document.getElementsByClassName('descripcion');
 var selected = document.getElementsByClassName('precio')[numerito];
-var totalcompra = document.getElementById('total');
 
+var choy = document.getElementsByClassName('llave');
 
 
 
 selected.className = "precio";
 
 
-//console.log('fila ' + numerito);
-var a = nombre.item(numerito).innerHTML;
-var b = marca.item(numerito).innerHTML;
-var c = descripcion.item(numerito).innerHTML;
-var d = precio.item(numerito).innerHTML;
-var x = numerow.item(numerito).value;
+var z = choy.item(numerito).innerHTML;
 
 
-lista = a + " " + b + " " + c + " " + d;
 //console.log(lista)
 
-console.log(lista);
-console.log(d);
-console.log(x);
+
 
 //console.log(totalDeuda);
 
-var lista = "<strong> " + x + " </strong> " + lista  + "<strong> $ " + d + "</strong>";
+for (k in todo){
+  
+    if(todo[k].id == z){
+                var elementoEliminado = todo.splice(k, 1);
+                  console.log(todo);
+                }
+}
 
 
-const index = mostrador.findIndex(producto => producto === lista);
-mostrador.splice(index, 1);
-
-
-//console.log(conteo.length);
 
 
 numerow.item(numerito).value = '';
@@ -459,23 +446,34 @@ function activa(){
 var totalcompra = document.getElementById('total');
   var totalDeuda = 0;
 
-  $(".MyClass").each(function(){
-  totalDeuda+=parseFloat($(this).html()) || 0;
-  totalcompra.innerHTML = 'Total a pagar: $'+ totalDeuda;
+//  $(".MyClass").each(function(){
+ // totalDeuda+=parseFloat($(this).html()) || 0;
+ // totalcompra.innerHTML = 'Total a pagar: $'+ totalDeuda;
 
-});
+for(k in todo){
+   totalDeuda += todo[k].preciosuma
 
-
-  document.getElementById("mostrar").innerHTML = '';
-  mostrador.forEach(despliega);
 }
+
+
+totalcompra.innerHTML = 'Total a pagar: $'+ totalDeuda;
+
+document.getElementById("mostrar").innerHTML = '';
+  todo.forEach(despliega);
+
+};
+
+
+  
+
 
 function despliega(item, index) {
 
   //document.getElementById("mostrar").innerHTML = '';
 
  
-  document.getElementById("mostrar").innerHTML += item + "<br>"; 
+  document.getElementById("mostrar").innerHTML += "<strong>"+ item.cantidades + "</strong> "
+   + item.detalle + " <strong> $" + item.preciosuma + "</strong>" + "<br>"; 
 }
 
 
