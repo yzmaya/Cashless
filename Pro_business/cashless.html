@@ -68,7 +68,7 @@
         <td class="nombre">{{mensaje.nombre}}</td>
         <td class="marca">{{mensaje.marca}}</td>
         <td class="descripcion">{{mensaje.detalles}}</td>
-        <td class="precio">{{mensaje.precio}}</td>
+        <td class="precio">${{mensaje.precio}}</td>
       </tr>
       
     </tbody>
@@ -156,32 +156,7 @@ window.location.href = 'index.html';
 });
 
 
-  var valor = localStorage.getItem('uiid');
-
-
-
-
-
-
-
-
-   //document.getElementById('trcolor').style.backgroundColor='gray'
-
-   //  console.log( $(".getValue").text());
-   // const toggle = document.querySelector(".onoffswitch-checkbox");
-
-//const body = document.querySelector("#marcador");
-//const body2 = body.querySelector(".getValue");
-
-
-  //body.style.backgroundColor='orange';
-//console.log(document.getElementById('marcador').getElementsByClassName('getValue'));
-
-
-
-
-     
-        
+  var valor = localStorage.getItem('uiid');   
 
 
 const db = firebase.database();
@@ -329,7 +304,8 @@ var c = descripcion.item(numerito).innerHTML;
 var d = precio.item(numerito).innerHTML;
 var z = choy.item(numerito).innerHTML;
 
-var conversion = parseFloat(d);
+var holis = d.slice(1)
+var conversion = parseFloat(holis);
 
 lista = a + " " + b + " " + c;
 let seleccion = {
@@ -346,7 +322,7 @@ let seleccion = {
 
 todo.push(seleccion);
 
-
+console.log(todo);
  }else{
   x.id=""; 
 
