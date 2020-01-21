@@ -281,40 +281,9 @@ for (k in todo){
                   //document.getElementsByClassName('precio')[ubicacion].innerHTML = multiplicacion;
                   console.log(todo);
                 }
+              }
+       }
 }
-
-
-
-
-}
-//if(cant == ''){
- // console.log('no hay cantidad');
-  
- //var entero = parseInt(temporal2);
- //document.getElementsByClassName('precio')[entero].innerHTML = temporal;
-//}else{
- //var temporal = localStorage.getItem("temporal");
- //var temporal2 = localStorage.getItem("temporal2");
-//var entero = parseInt(temporal2);
-
-//var temptotal = 0;
-//temptotal=parseInt(cant) * parseFloat(temporal); 
-
-
-//document.getElementsByClassName('precio')[entero].innerHTML = temptotal;
-
-
-//console.log(cant);
-//console.log(temporal);
-//console.log(temptotal);
-//console.log(temporal2);
-//console.log(todo)
-
-//todo.forEach(muestra);
-//}
-
-  
-  }
 
 
 
@@ -349,17 +318,10 @@ numerow.item(numerito).value = '';
 
 var choy = document.getElementsByClassName('llave');
 
-
-
-    selected.className += " MyClass";
+selected.className += " MyClass";
 
 numerow.item(numerito).focus();
 
-
-
-
-//document.getElementById("MyElement").className = "MyClass";
-//localStorage.setItem('precio' + numerito, precio.item(numerito).innerHTML);
 
 var a = nombre.item(numerito).innerHTML;
 var b = marca.item(numerito).innerHTML;
@@ -381,24 +343,12 @@ let seleccion = {
 };
 
 
-//months.splice(1, 0, 'Feb');
-//productos.push(lista);
 
 todo.push(seleccion);
-//console.log(productos);
-
-
-
-
-
-//console.log(totalDeuda);
 
 
  }else{
   x.id=""; 
-  //var conteo = document.getElementsByName('conteo');
-  //console.log(x.getAttribute("name"));
-   //x.removeAttribute("name");
 
   x.style.background="white" 
    x.style.color="black" 
@@ -407,19 +357,11 @@ var selected = document.getElementsByClassName('precio')[numerito];
 
 var choy = document.getElementsByClassName('llave');
 
-
-
 selected.className = "precio";
 
 
 var z = choy.item(numerito).innerHTML;
 
-
-//console.log(lista)
-
-
-
-//console.log(totalDeuda);
 
 for (k in todo){
   
@@ -436,9 +378,6 @@ numerow.item(numerito).value = '';
  }
 
 
-//console.log(productos);
-//productos.forEach(element => console.log(element));
-
 }
 
 
@@ -446,15 +385,10 @@ function activa(){
 var totalcompra = document.getElementById('total');
   var totalDeuda = 0;
 
-//  $(".MyClass").each(function(){
- // totalDeuda+=parseFloat($(this).html()) || 0;
- // totalcompra.innerHTML = 'Total a pagar: $'+ totalDeuda;
-
 for(k in todo){
    totalDeuda += todo[k].preciosuma
 
-}
-
+    }
 
 totalcompra.innerHTML = 'Total a pagar: $'+ totalDeuda;
 
