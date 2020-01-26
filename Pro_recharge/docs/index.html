@@ -40,7 +40,7 @@
         <div class="FlexPanel detailsPanel QRScannerShort">
           <div class="FlexPanel shortInfoPanel">
             <br>
-              <input style="width: 100%;" id="monto" type="number" maxlength="12" name="" placeholder="Ingresa la cantidad a recargar $" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
+              <input class="form-control" style="width: 100%;" id="monto" type="number" maxlength="12" name="" placeholder="Ingresa la cantidad a recargar $" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
             
           </div>
         </div>
@@ -76,7 +76,24 @@
       <br>
       <button disabled="" id="boton" onclick="recargar()" class="btn"><span class="glyphicon glyphicon-qrcode"> </span> Recargar</button>
     </div>
+    <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
   <script type="text/javascript">
+
+// Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDI6U0vWBHZY0pdkzbQd0NRqpcfY3uPrrk",
+    authDomain: "cashless-c8e7b.firebaseapp.com",
+    databaseURL: "https://cashless-c8e7b.firebaseio.com",
+    projectId: "cashless-c8e7b",
+    storageBucket: "cashless-c8e7b.appspot.com",
+    messagingSenderId: "482722912691",
+    appId: "1:482722912691:web:f8395fd37fef973f7ad3c6",
+    measurementId: "G-QLM4ZSX74X"
+  };
+  firebase.initializeApp(config);
+
+var db = firebase.firestore();
 
 
 function recargar(){
@@ -89,6 +106,18 @@ function recargar(){
   }else{
     var valor = localStorage.getItem('uiid');  
     alert(monto + " " + valor);
+
+        db.collection("users").doc(valor).set({
+            dinero: monto
+        })
+        .then(function(docRef) {
+            console.log("Document written with ID: ", docRef.id);
+        })
+        .catch(function(error) {
+            console.error("Error adding document: ", error);
+        });
+
+
   }
 
   
