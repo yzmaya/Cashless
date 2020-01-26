@@ -40,7 +40,7 @@
         <div class="FlexPanel detailsPanel QRScannerShort">
           <div class="FlexPanel shortInfoPanel">
             <br>
-              <input class="form-control" style="width: 100%;" id="monto" type="number" maxlength="12" name="" placeholder="Ingresa la cantidad a recargar $123
+              <input class="form-control" style="width: 100%;" id="monto" type="number" maxlength="12" name="" placeholder="Ingresa la cantidad a recargar $1234
               " onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
             
           </div>
@@ -107,7 +107,7 @@ function recargar(){
     alert("necesitas ingresar el monto de la recarga");
     document.getElementById("monto").focus();
   }else{
-    var valor = localStorage.getItem('uiid');  
+    var valor = localStorage.getItem('uid');  
     //alert(monto + " " + valor);
 docRef = db.collection("users").doc(valor);
 
@@ -161,7 +161,7 @@ function sumar(x){
     	if(scannedTextMemo)
     	{
     	
-        localStorage.setItem('uiid', scannedText);
+        localStorage.setItem('uid', scannedText);
 
         document.getElementById("boton").disabled = false;
         document.getElementById("boton").className = "btn btn-success";
