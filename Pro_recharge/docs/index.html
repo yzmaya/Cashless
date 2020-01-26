@@ -17,14 +17,14 @@
     <!--                                           -->
     <!-- Any title is fine                         -->
     <!--                                           -->
-    <title>JsQRScanner example</title>
+    <title>Recarga</title>
     
     <!--                                           -->
     <!-- This script loads your compiled module.   -->
-    <script type="text/javascript" src="./jsPretty/jsqrscanner.nocache.js"></script>
+    <script type="text/javascript" src="jsPretty/jsqrscanner.nocache.js"></script>
   </head>
 
-  <body>
+  <body style="background-color: #CCCCCC;">
 
     <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
     <noscript>
@@ -35,12 +35,11 @@
     </noscript>
 
     <div class="row-element-set row-element-set-QRScanner">
-      <h1>JsQRScanner example</h1>
       <div class="row-element">
         <div class="FlexPanel detailsPanel QRScannerShort">
           <div class="FlexPanel shortInfoPanel">
-            <div class="gwt-HTML">
-              Point the webcam to a QR code.
+            <div class="">
+              <input style="width: 100%;" type="number" maxlength="12" name="" placeholder="Ingresa la cantidad a recargar $" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
             </div>
           </div>
         </div>
@@ -54,15 +53,14 @@
         <div class="form-field form-field-memo">
           <div class="form-field-caption-panel">
             <div class="gwt-Label form-field-caption">
-              Scanned text
+              
             </div>
           </div>
           <div class="FlexPanel form-field-input-panel">
-            <textarea id="scannedTextMemo" class="textInput form-memo form-field-input textInput-readonly" rows="3" readonly>
-            </textarea>
+           <span id="scannedTextMemo"></span>
           </div>
         </div>
-        <div class="form-field form-field-memo">
+       <!-- <div class="form-field form-field-memo">
           <div class="form-field-caption-panel">
             <div class="gwt-Label form-field-caption">
               Scanned text history
@@ -72,10 +70,10 @@
             <textarea id="scannedTextMemoHist" class="textInput form-memo form-field-input textInput-readonly" value="" rows="6" readonly>
             </textarea>
           </div>
-        </div>
+        </div> -->
       </div>
       <br>
-      <a style="font-weight: bold;" href="https://github.com/jbialobr/JsQRScanner">The source code is hosted on GitHub</a>
+      <button>Aceptar</button>
     </div>
   <script type="text/javascript">
     function onQRCodeScanned(scannedText)
@@ -85,11 +83,11 @@
     	{
     		scannedTextMemo.value = scannedText;
     	}
-    	var scannedTextMemoHist = document.getElementById("scannedTextMemoHist");
-    	if(scannedTextMemoHist)
-    	{
-    		scannedTextMemoHist.value = scannedTextMemoHist.value + '\n' + scannedText;
-    	}
+   // 	var scannedTextMemoHist = document.getElementById("scannedTextMemoHist");
+    //	if(scannedTextMemoHist)
+    	//{
+    		//scannedTextMemoHist.value = scannedTextMemoHist.value + '\n' + scannedText;
+    	//}
     }
     
     function provideVideo()
