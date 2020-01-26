@@ -39,7 +39,7 @@
         <div class="FlexPanel detailsPanel QRScannerShort">
           <div class="FlexPanel shortInfoPanel">
             <div class="">
-              <input style="width: 100%;" type="number" maxlength="12" name="" placeholder="Ingresa la cantidad a recargar $" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
+              <input style="width: 100%;" id="monto" type="number" maxlength="12" name="" placeholder="Ingresa la cantidad a recargar $" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
             </div>
           </div>
         </div>
@@ -74,9 +74,17 @@
         </div> -->
       </div>
       <br>
-      <button>Aceptar</button>
+      <button onclick="recargar">Recargar</button>
     </div>
   <script type="text/javascript">
+function recargar(){
+  var id = document.getElementById("scannedTextMemo").value;
+  var monto = document.getElementById("monto").value;
+
+  alert(monto + " " + id)
+}
+
+
     function onQRCodeScanned(scannedText)
     {
     	var scannedTextMemo = document.getElementById("scannedTextMemo");
