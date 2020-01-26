@@ -141,6 +141,8 @@ function sumar(x){
             //console.log("Document written with ID: ", db.id);
             document.getElementById("monto").value = '';
             alert("Tu recarga se ha realizado con éxito!")
+            document.getElementById("boton").disabled = true;
+            document.getElementById("boton").className = "btn btn";
         })
         .catch(function(error) {
             console.error("Error adding document: ", error);

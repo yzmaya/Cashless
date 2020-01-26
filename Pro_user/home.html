@@ -131,8 +131,10 @@ firebase.auth().onAuthStateChanged(function(user) {
             if (doc.exists) {
               var myObject = doc.data();
         document.getElementById("minombre").innerHTML = "Bienvenido : " + myObject.fnombre + " " + myObject.fapellido;
-        document.getElementById("total").innerHTML = "Has Recargado : " + myObject.precio ;
+        document.getElementById("total").innerHTML = "Has Recargado :  <strong style='color: green;'>$" + myObject.dinero + "</strong>";
         document.getElementById("resta").innerHTML = "Te queda : " ;
+
+        console.log(doc.data())
             } else {
                 // doc.data() will be undefined in this case
                 console.log("No such document!");
