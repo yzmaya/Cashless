@@ -39,9 +39,9 @@
       <div class="row-element">
         <div class="FlexPanel detailsPanel QRScannerShort">
           <div class="FlexPanel shortInfoPanel">
-            <div class="">
+            <br>
               <input style="width: 100%;" id="monto" type="number" maxlength="12" name="" placeholder="Ingresa la cantidad a recargar $" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
-            </div>
+            
           </div>
         </div>
       </div>
@@ -74,7 +74,7 @@
         </div> -->
       </div>
       <br>
-      <button disabled="" id="boton" onclick="recargar()" class="btn btn-success"><span class="glyphicon glyphicon-qrcode"> </span> Recargar</button>
+      <button disabled="" id="boton" onclick="recargar()" class="btn"><span class="glyphicon glyphicon-qrcode"> </span> Recargar</button>
     </div>
   <script type="text/javascript">
 
@@ -104,6 +104,7 @@ function recargar(){
         localStorage.setItem('uiid', scannedText);
 
         document.getElementById("boton").disabled = false;
+        document.getElementById("boton").className = "btn btn-success";
     	}
    // 	var scannedTextMemoHist = document.getElementById("scannedTextMemoHist");
     //	if(scannedTextMemoHist)
