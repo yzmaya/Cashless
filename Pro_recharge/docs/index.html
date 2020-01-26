@@ -58,8 +58,7 @@
             </div>
           </div>
           <div class="FlexPanel form-field-input-panel">
-            <textarea id="scannedTextMemo" class="textInput form-memo form-field-input textInput-readonly" rows="3" readonly>
-            </textarea>
+            <span id="scannedTextMemo"></span>
           </div>
         </div>
        <!-- <div class="form-field form-field-memo">
@@ -79,7 +78,7 @@
     </div>
   <script type="text/javascript">
 function recargar(){
-  var id = document.getElementById("scannedTextMemo").value;
+  var id = document.getElementById("scannedTextMemo").innerHTML;
   var monto = document.getElementById("monto").value;
 
   alert(monto + " " + id)
@@ -91,7 +90,7 @@ function recargar(){
     	var scannedTextMemo = document.getElementById("scannedTextMemo");
     	if(scannedTextMemo)
     	{
-    		scannedTextMemo.value = scannedText;
+    		scannedTextMemo.innerHTML = scannedText;
     	}
    // 	var scannedTextMemoHist = document.getElementById("scannedTextMemoHist");
     //	if(scannedTextMemoHist)
