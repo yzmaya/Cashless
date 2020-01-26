@@ -4,7 +4,7 @@
 <!-- "Standards Mode". Replacing this declaration   -->
 <!-- with a "Quirks Mode" doctype is not supported. -->
 
-<html>
+<html> 
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -79,6 +79,7 @@
     </div>
     <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
   <script type="text/javascript">
 
 // Initialize Firebase
@@ -95,6 +96,30 @@
   firebase.initializeApp(config);
 
 
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+
+
+    // User is signed in.
+
+    var user = firebase.auth().currentUser;
+    console.log('usuario autentificado');
+
+    var uid = user.uid;
+    //document.getElementById("myid").innerHTML = uid;
+  
+    if(user != null){
+ 
+    }
+
+  } else {
+    // No user is signed in.
+
+    console.log('usuario no logueadox')
+window.location.href = 'index.html';
+  }
+});
 
 
 
