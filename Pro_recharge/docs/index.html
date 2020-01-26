@@ -40,7 +40,8 @@
         <div class="FlexPanel detailsPanel QRScannerShort">
           <div class="FlexPanel shortInfoPanel">
             <br>
-              <input class="form-control" style="width: 100%;" id="monto" type="number" maxlength="12" name="" placeholder="Ingresa la cantidad a recargar $12" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
+              <input class="form-control" style="width: 100%;" id="monto" type="number" maxlength="12" name="" placeholder="Ingresa la cantidad a recargar $123
+              " onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
             
           </div>
         </div>
@@ -108,16 +109,44 @@ function recargar(){
   }else{
     var valor = localStorage.getItem('uiid');  
     //alert(monto + " " + valor);
+docRef = db.collection("users").doc(valor);
 
-        db.collection("users").doc(valor).add({
-            dinero: monto
+        docRef.get().then(function(doc) {
+            if (doc.exists) {
+              var myObject = doc.data();
+             var montoactual =  myObject.dinero;
+
+             sumar(montoactual);
+      
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }).catch(function(error) {
+            console.log("Error getting document:", error);
+        });
+
+function sumar(x){
+  var existe = parseFloat(x);
+  var nuevo = parseFloat(monto);
+  
+  existe += nuevo
+
+        db.collection("users").doc(valor).update({
+            dinero: existe
         })
         .then(function(docRef) {
-            console.log("Document written with ID: ", docRef.id);
+            //console.log("Document written with ID: ", db.id);
+            document.getElementById("monto").value = '';
+            alert("Tu recarga se ha realizado con éxito!")
         })
         .catch(function(error) {
             console.error("Error adding document: ", error);
         });
+
+};
+
+
 
 
   }
