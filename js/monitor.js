@@ -24,7 +24,9 @@ firebase.auth().onAuthStateChanged(function(user) {
   
      var uid = user.uid;
     mostrarDatos();
-    
+    console.log(uid)
+    console.log(localStorage.getItem('uid'));
+console.log(localStorage.getItem('uiid'));
     // document.getElementById("uid").innerHTML = uid; 
 
     }

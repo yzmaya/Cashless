@@ -10,9 +10,8 @@ firebase.auth().onAuthStateChanged(function(user) {
    
         guardarInfo(uid);
 
-
     if(user != null){
-window.location.href = 'monitor.html';
+//window.location.href = 'monitor.html';
     }
 
   } else {

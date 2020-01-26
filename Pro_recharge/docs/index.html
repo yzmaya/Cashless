@@ -95,7 +95,9 @@
   firebase.initializeApp(config);
 
 
+  localStorage.clear();
 
+console.log(localStorage.getItem('uiid'));
 
 function recargar(){
   var db = firebase.firestore();

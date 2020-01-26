@@ -119,6 +119,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
     var user = firebase.auth().currentUser;
     console.log('usuario autentificado');
+
     var uid = user.uid;
     //document.getElementById("myid").innerHTML = uid;
     localStorage.setItem('uiid', uid);
@@ -130,7 +131,7 @@ firebase.auth().onAuthStateChanged(function(user) {
             if (doc.exists) {
               var myObject = doc.data();
         document.getElementById("minombre").innerHTML = "Bienvenido : " + myObject.fnombre + " " + myObject.fapellido;
-        document.getElementById("total").innerHTML = "Has Recargado : " ;
+        document.getElementById("total").innerHTML = "Has Recargado : " + myObject.precio ;
         document.getElementById("resta").innerHTML = "Te queda : " ;
             } else {
                 // doc.data() will be undefined in this case
