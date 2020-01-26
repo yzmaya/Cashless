@@ -74,14 +74,24 @@
         </div> -->
       </div>
       <br>
-      <button onclick="recargar()" class="btn btn-success"><span class="glyphicon glyphicon-qrcode"> </span> Recargar</button>
+      <button disabled="" id="boton" onclick="recargar()" class="btn btn-success"><span class="glyphicon glyphicon-qrcode"> </span> Recargar</button>
     </div>
   <script type="text/javascript">
+
+
 function recargar(){
   var id = document.getElementById("scannedTextMemo").innerHTML;
   var monto = document.getElementById("monto").value;
 
-  alert(monto + " " + id)
+  if(monto==''){
+    alert("necesitas ingresar el monto de la recarga");
+    document.getElementById("monto").focus();
+  }else{
+    var valor = localStorage.getItem('uiid');  
+    alert(monto + " " + valor);
+  }
+
+  
 }
 
 
@@ -90,7 +100,10 @@ function recargar(){
     	var scannedTextMemo = document.getElementById("scannedTextMemo");
     	if(scannedTextMemo)
     	{
-    		scannedTextMemo.innerHTML = scannedText;
+    	
+        localStorage.setItem('uiid', scannedText);
+
+        document.getElementById("boton").disabled = false;
     	}
    // 	var scannedTextMemoHist = document.getElementById("scannedTextMemoHist");
     //	if(scannedTextMemoHist)
