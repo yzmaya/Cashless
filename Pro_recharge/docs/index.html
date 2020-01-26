@@ -40,7 +40,7 @@
         <div class="FlexPanel detailsPanel QRScannerShort">
           <div class="FlexPanel shortInfoPanel">
             <br>
-              <input class="form-control" style="width: 100%;" id="monto" type="number" maxlength="12" name="" placeholder="Ingresa la cantidad a recargar $1" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
+              <input class="form-control" style="width: 100%;" id="monto" type="number" maxlength="12" name="" placeholder="Ingresa la cantidad a recargar $12" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
             
           </div>
         </div>
@@ -93,10 +93,12 @@
   };
   firebase.initializeApp(config);
 
-var db = firebase.firestore();
+
 
 
 function recargar(){
+  var db = firebase.firestore();
+
   var id = document.getElementById("scannedTextMemo").innerHTML;
   var monto = document.getElementById("monto").value;
 
@@ -107,7 +109,7 @@ function recargar(){
     var valor = localStorage.getItem('uiid');  
     //alert(monto + " " + valor);
 
-        db.collection("users").doc(valor).set({
+        db.collection("users").doc(valor).add({
             dinero: monto
         })
         .then(function(docRef) {

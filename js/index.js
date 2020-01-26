@@ -12,7 +12,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 
     if(user != null){
-//window.location.href = 'monitor.html';
+window.location.href = 'monitor.html';
     }
 
   } else {
@@ -83,7 +83,7 @@ function guardarInfo(id){
         document.getElementById("nuevo_email").value = '';
         //***** COMENTA Y DESCOMENTA PARA VER EL MONITOR.HTML *****************************
       
-        logout();
+        //logout();
 
        // window.location.href = 'monitor.html';
      //  document.getElementById("item_txt").value = id;
