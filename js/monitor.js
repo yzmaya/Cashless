@@ -25,8 +25,7 @@ firebase.auth().onAuthStateChanged(function(user) {
      var uid = user.uid;
     mostrarDatos();
     console.log(uid)
-    console.log(localStorage.getItem('uid'));
-console.log(localStorage.getItem('uiid'));
+   
     // document.getElementById("uid").innerHTML = uid; 
 
     }
@@ -35,7 +34,7 @@ console.log(localStorage.getItem('uiid'));
     // No user is signed in.
 
     console.log('usuario no logueado')
-    window.location.href = 'index.html';
+    window.location.href = 'premonitor.html';
 
   }
 });

@@ -82,7 +82,7 @@ function guardarInfo(id){
         document.getElementById("nuevo_email").value = '';
         //***** COMENTA Y DESCOMENTA PARA VER EL MONITOR.HTML *****************************
       
-        //logout();
+        logout();
 
        // window.location.href = 'monitor.html';
      //  document.getElementById("item_txt").value = id;

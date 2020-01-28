@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>R E C O</title>
+
+
+<meta charset="utf-8">
+ <link rel="shortcut icon" type="image/x-icon" href="images/icono.ico">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <link rel='stylesheet' href='css/style.css' type='text/css'>
+ 
+ 
+ 
+</head>
+<body style="background-color: #F6F6F6;">
+
+  <div class="container">
+
+  <div class="login-container" id="login_div">
+            <div class=""><h3>Acceso a Impresion</h3></div>
+            
+            
+               
+              
+                <div class="form-group">
+                  <div class=""><label>Correo electrónico</label>
+                    <input type="email" class="form-control" id="email" placeholder="Correo Electrónico" name="email" required="">
+                  </div>
+                  <div class=""><label>Contraseña</label>
+                    <input type="password" class="form-control" id="pass" placeholder="Contraseña" name="email" required="">
+                  </div>
+                </div>
+       <!--         <div class="form-group">
+                  <div class="">          
+                    <input type="password" class="form-control" id="nuevo_pwd" placeholder="Ingresar Contraseña" name="pwd" required="">
+                  </div>
+                </div> -->
+                <div class="form-group">        
+                  <div class="">
+              
+                    <button  class="btn btn-success" onclick="iniciarsesion()">Acceder</button>
+                  </div>
+                </div>
+              
+                
+</div>
+
+ <!-- MODAL PARA REGISTRARSE COMO NUEVO USUARIO  -->
+
+
+
+</div>
+
+
+
+<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
+<script>
+  // Initialize Firebase
+   // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDI6U0vWBHZY0pdkzbQd0NRqpcfY3uPrrk",
+    authDomain: "cashless-c8e7b.firebaseapp.com",
+    databaseURL: "https://cashless-c8e7b.firebaseio.com",
+    projectId: "cashless-c8e7b",
+    storageBucket: "cashless-c8e7b.appspot.com",
+    messagingSenderId: "482722912691",
+    appId: "1:482722912691:web:f8395fd37fef973f7ad3c6",
+    measurementId: "G-QLM4ZSX74X"
+
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  
+</script>
+<script src="js/indexpremonitor.js"></script>
+
+<script src="js/jquery.min.js"></script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
