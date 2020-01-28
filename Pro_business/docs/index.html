@@ -131,9 +131,7 @@ window.location.href = 'index.html';
 function cobrar(){
   var db = firebase.firestore();
 
-  var id = document.getElementById("scannedTextMemo").innerHTML;
- 
-
+  var id = localStorage.getItem('uid');
 
    
 docRef = db.collection("users").doc(id);
