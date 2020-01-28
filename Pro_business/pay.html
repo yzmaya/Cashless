@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>PAY</title>
+</head>
+<body>
+<p id="hola"></p>
+<button onclick="guardarCompra()">Dale</button>
+</body>
+<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
+<script>
+	  var config = {
+    apiKey: "AIzaSyDI6U0vWBHZY0pdkzbQd0NRqpcfY3uPrrk",
+    authDomain: "cashless-c8e7b.firebaseapp.com",
+    databaseURL: "https://cashless-c8e7b.firebaseio.com",
+    projectId: "cashless-c8e7b",
+    storageBucket: "cashless-c8e7b.appspot.com",
+    messagingSenderId: "482722912691",
+    appId: "1:482722912691:web:f8395fd37fef973f7ad3c6",
+    measurementId: "G-QLM4ZSX74X"
+  };
+  firebase.initializeApp(config);
+var db = firebase.firestore();
+
+
+
+
+function guardarCompra(){
+ 
+
+ db.collection('users').doc("N98pXr7CKOWNgwVSNMep6sXIaDv2").collection("venta").add({
+          venta: array
+          
+          
+      })
+      .then(function(docRef) {
+        //  console.log("Document written with ID: ", docRef.perfil);
+       
+        //***** COMENTA Y DESCOMENTA PARA VER EL MONITOR.HTML *****************************
+      
+       // logout();
+
+       // window.location.href = 'monitor.html';
+     //  document.getElementById("item_txt").value = id;
+       //$("#item_txt").focus();
+
+      })
+      .catch(function(error) {
+          console.error("Error adding document: ", error);
+      });
+
+
+};
+
+	var array = localStorage.getItem('data');
+// Se parsea para poder ser usado en js con JSON.parse :)
+array = JSON.parse(array);
+console.log(array)
+
+ document.getElementById("hola").innerHTML = array[0].id;
+</script>
+</html>

@@ -1,0 +1,267 @@
+<!doctype html>
+<!-- The DOCTYPE declaration above will set the     -->
+<!-- browser's rendering engine into                -->
+<!-- "Standards Mode". Replacing this declaration   -->
+<!-- with a "Quirks Mode" doctype is not supported. -->
+
+<html> 
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Janusz Białobrzewski" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--                                                               -->
+    <!-- Consider inlining CSS to reduce the number of requested files -->
+    <!--                                                               -->
+    <link type="text/css" rel="stylesheet" href="css/JsQRScanner.css">
+
+    <!--                                           -->
+    <!-- Any title is fine                         -->
+    <!--                                           -->
+    <title>Recarga</title>
+    
+    <!--                                           -->
+    <!-- This script loads your compiled module.   -->
+    <script type="text/javascript" src="jsPretty/jsqrscanner.nocache.js"></script>
+  </head>
+
+  <body style="background-color: #CCCCCC;">
+
+    <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
+    <noscript>
+      <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+        Your web browser must have JavaScript enabled
+        in order for this application to display correctly.
+      </div>
+    </noscript>
+
+    <div class="container">
+      <div class="row-element">
+        <div class="FlexPanel detailsPanel QRScannerShort">
+          <div class="FlexPanel shortInfoPanel">
+            <br>
+        
+            
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row-element">
+        <div class="qrscanner" id="scanner">
+        </div>
+      </div>
+      <div class="row-element">
+        <div class="form-field form-field-memo">
+          <div class="form-field-caption-panel">
+            <div class="gwt-Label form-field-caption">
+              
+            </div>
+          </div>
+          <div class="FlexPanel form-field-input-panel">
+            <span id="scannedTextMemo"></span>
+          </div>
+        </div>
+       <!-- <div class="form-field form-field-memo">
+          <div class="form-field-caption-panel">
+            <div class="gwt-Label form-field-caption">
+              Scanned text history
+            </div>
+          </div>
+          <div class="FlexPanel form-field-input-panel">
+            <textarea id="scannedTextMemoHist" class="textInput form-memo form-field-input textInput-readonly" value="" rows="6" readonly>
+            </textarea>
+          </div>
+        </div> -->
+      </div>
+      <br>
+      <button disabled="" id="boton" onclick="cobrar()" class="btn"><span class="glyphicon glyphicon-qrcode"> </span> Cobrar</button>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+  <script type="text/javascript">
+
+// Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDI6U0vWBHZY0pdkzbQd0NRqpcfY3uPrrk",
+    authDomain: "cashless-c8e7b.firebaseapp.com",
+    databaseURL: "https://cashless-c8e7b.firebaseio.com",
+    projectId: "cashless-c8e7b",
+    storageBucket: "cashless-c8e7b.appspot.com",
+    messagingSenderId: "482722912691",
+    appId: "1:482722912691:web:f8395fd37fef973f7ad3c6",
+    measurementId: "G-QLM4ZSX74X"
+  };
+  firebase.initializeApp(config);
+
+
+var array = localStorage.getItem('data');
+// Se parsea para poder ser usado en js con JSON.parse :)
+array = JSON.parse(array);
+console.log(array)
+console.log(localStorage.getItem('totalcompra'));
+
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+
+
+    // User is signed in.
+
+    var user = firebase.auth().currentUser;
+    console.log('usuario autentificado');
+
+    var uid = user.uid;
+    //document.getElementById("myid").innerHTML = uid;
+  
+    if(user != null){
+ 
+    }
+
+  } else {
+    // No user is signed in.
+
+    console.log('usuario no logueadox')
+window.location.href = 'index.html';
+  }
+});
+
+
+
+function cobrar(){
+  var db = firebase.firestore();
+
+  var id = document.getElementById("scannedTextMemo").innerHTML;
+ 
+
+
+   
+docRef = db.collection("users").doc(id);
+
+        docRef.get().then(function(doc) {
+            if (doc.exists) {
+              var myObject = doc.data();
+             var montoactual =  myObject.dinero;
+
+             calcular(montoactual);
+      
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }).catch(function(error) {
+            console.log("Error getting document:", error);
+        });
+
+
+  
+}
+
+function calcular(x){
+  var existe = parseFloat(x);
+  var nuevo = localStorage.getItem('totalcompra');
+  
+  if(nuevo<=existe){
+    var descont = existe - nuevo;
+        db.collection("users").doc(valor).update({
+            dinero: descont
+        })
+        .then(function(docRef) {
+            //console.log("Document written with ID: ", db.id);
+            document.getElementById("monto").value = '';
+            alert("Tu recarga se ha realizado con éxito!")
+            document.getElementById("boton").disabled = true;
+            document.getElementById("boton").className = "btn btn";
+        })
+        .catch(function(error) {
+            console.error("Error adding document: ", error);
+        });
+      }else{
+        alert("No tienes el saldo suficiente amigo :(, por favor realiza una recarga");
+      }
+
+};
+
+
+    function onQRCodeScanned(scannedText)
+    {
+      var scannedTextMemo = document.getElementById("scannedTextMemo");
+      if(scannedTextMemo)
+      {
+      
+        localStorage.setItem('uid', scannedText);
+
+        document.getElementById("boton").disabled = false;
+        document.getElementById("boton").className = "btn btn-success";
+      }
+   //   var scannedTextMemoHist = document.getElementById("scannedTextMemoHist");
+    //  if(scannedTextMemoHist)
+      //{
+        //scannedTextMemoHist.value = scannedTextMemoHist.value + '\n' + scannedText;
+      //}
+    }
+    
+    function provideVideo()
+    {
+        var n = navigator;
+
+        if (n.mediaDevices && n.mediaDevices.getUserMedia)
+        {
+          return n.mediaDevices.getUserMedia({
+            video: {
+              facingMode: "environment"
+            },
+            audio: false
+          });
+        } 
+        
+        return Promise.reject('Your browser does not support getUserMedia');
+    }
+
+    function provideVideoQQ()
+    {
+        return navigator.mediaDevices.enumerateDevices()
+        .then(function(devices) {
+            var exCameras = [];
+            devices.forEach(function(device) {
+            if (device.kind === 'videoinput') {
+              exCameras.push(device.deviceId)
+            }
+         });
+            
+            return Promise.resolve(exCameras);
+        }).then(function(ids){
+            if(ids.length === 0)
+            {
+              return Promise.reject('Could not find a webcam');
+            }
+            
+            return navigator.mediaDevices.getUserMedia({
+                video: {
+                  'optional': [{
+                    'sourceId': ids.length === 1 ? ids[0] : ids[1]//this way QQ browser opens the rear camera
+                    }]
+                }
+            });        
+        });                
+    }
+    
+    //this function will be called when JsQRScanner is ready to use
+    function JsQRScannerReady()
+    {
+        //create a new scanner passing to it a callback function that will be invoked when
+        //the scanner succesfully scan a QR code
+        var jbScanner = new JsQRScanner(onQRCodeScanned);
+        //var jbScanner = new JsQRScanner(onQRCodeScanned, provideVideo);
+        //reduce the size of analyzed image to increase performance on mobile devices
+        jbScanner.setSnapImageMaxSize(300);
+      var scannerParentElement = document.getElementById("scanner");
+      if(scannerParentElement)
+      {
+          //append the jbScanner to an existing DOM element
+        jbScanner.appendTo(scannerParentElement);
+      }        
+    }
+  </script>    
+  </body>
+</html>

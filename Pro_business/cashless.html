@@ -98,7 +98,7 @@
         </div>
         <div class="modal-footer">
           <div style="text-align: left; color: red;"><span id="total"></span></div>
-          <button type="button" class="btn btn-success" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span> Aceptar</button>
+          <button type="button" onclick="guardarArreglo()" class="btn btn-success" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span> Aceptar</button>
           <button type="button" class="btn btn-warning"  data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
         </div>
       </div>
@@ -262,9 +262,21 @@ for (k in todo){
 
 
 
+function guardarArreglo(){
+
+  var totcomp = 0;
+  for(k in todo){
+   totcomp += todo[k].preciosuma
+
+    }
+
+  localStorage.setItem('data',JSON.stringify(todo))
+  localStorage.setItem('totalcompra',totcomp)
+  window.location.href = 'docs/index.html';
+}
 
 
-
+console.log(localStorage.getItem('totalcompra'));
 
 const todo = [];
 
