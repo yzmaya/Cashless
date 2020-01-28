@@ -75,6 +75,7 @@
       </div>
       <br>
       <button disabled="" id="boton" onclick="cobrar()" class="btn"><span class="glyphicon glyphicon-qrcode"> </span> Cobrar</button>
+      <button onclick="estatusquo()"></button>
     </div>
     <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
@@ -127,11 +128,13 @@ window.location.href = 'index.html';
 });
 
 
+function estatusquo(){
+  console.log(localStorage.getItem('uid'));
+}
 
+ var id = localStorage.getItem('uid');
 function cobrar(){
   var db = firebase.firestore();
-
-  var id = localStorage.getItem('uid');
 
    
 docRef = db.collection("users").doc(id);
@@ -156,18 +159,31 @@ docRef = db.collection("users").doc(id);
 }
 
 function calcular(x){
+   var db = firebase.firestore();
+
   var existe = parseFloat(x);
   var nuevo = localStorage.getItem('totalcompra');
   
-  if(nuevo<=existe){
+  if(parseFloat(nuevo)<=existe){
+    //Se agrega el objeto a la sb con la compra realizada
+     db.collection('users').doc(id).collection("venta").add({
+          venta: array
+          
+      })
+      .then(function(docRef) {
+   
+      })
+      .catch(function(error) {
+          console.error("Error adding document: ", error);
+      });
+    //se realiza la resta, para poder dejar el monto final dentro de la db
     var descont = existe - nuevo;
-        db.collection("users").doc(valor).update({
+        db.collection("users").doc(id).update({
             dinero: descont
         })
         .then(function(docRef) {
             //console.log("Document written with ID: ", db.id);
-            document.getElementById("monto").value = '';
-            alert("Tu recarga se ha realizado con éxito!")
+            alert("Tu cobro se ha realizado con éxito!")
             document.getElementById("boton").disabled = true;
             document.getElementById("boton").className = "btn btn";
         })
@@ -176,6 +192,8 @@ function calcular(x){
         });
       }else{
         alert("No tienes el saldo suficiente amigo :(, por favor realiza una recarga");
+        document.getElementById("boton").disabled = true;
+        document.getElementById("boton").className = "btn btn";
       }
 
 };
