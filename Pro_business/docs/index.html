@@ -75,7 +75,7 @@
       </div>
       <br>
       <button disabled="" id="boton" onclick="cobrar()" class="btn"><span class="glyphicon glyphicon-qrcode"> </span> Cobrar</button>
-      <button onclick="estatusquo()"></button>
+      <button  onclick="regresar()" class="btn btn-info">Regresar</button>
     </div>
     <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
@@ -105,8 +105,6 @@ console.log(localStorage.getItem('totalcompra'));
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
-
-
     // User is signed in.
 
     var user = firebase.auth().currentUser;
@@ -114,7 +112,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
     var uid = user.uid;
     //document.getElementById("myid").innerHTML = uid;
-  
+    localStorage.setItem('uidprov',uid);
     if(user != null){
  
     }
@@ -127,16 +125,12 @@ window.location.href = 'index.html';
   }
 });
 
+const db = firebase.firestore();
 
-function estatusquo(){
-  console.log(localStorage.getItem('uid'));
-}
 
- var id = localStorage.getItem('uid');
+
 function cobrar(){
-  var db = firebase.firestore();
-
-   
+    var id = localStorage.getItem('uid');
 docRef = db.collection("users").doc(id);
 
         docRef.get().then(function(doc) {
@@ -159,14 +153,26 @@ docRef = db.collection("users").doc(id);
 }
 
 function calcular(x){
-   var db = firebase.firestore();
-
+  var id = localStorage.getItem('uid');
+  var idprov = localStorage.getItem('uidprov');
   var existe = parseFloat(x);
   var nuevo = localStorage.getItem('totalcompra');
   
   if(parseFloat(nuevo)<=existe){
     //Se agrega el objeto a la sb con la compra realizada
      db.collection('users').doc(id).collection("venta").add({
+          venta: array
+          
+      })
+      .then(function(docRef) {
+   
+      })
+      .catch(function(error) {
+          console.error("Error adding document: ", error);
+      });
+    //se agrega una copia de los productos vendidos del proveedor a su base
+
+    db.collection('users').doc(idprov).collection("ventaprov").add({
           venta: array
           
       })
@@ -190,6 +196,12 @@ function calcular(x){
         .catch(function(error) {
             console.error("Error adding document: ", error);
         });
+
+        localStorage.removeItem('data');
+        localStorage.removeItem('totalcompra');
+        localStorage.removeItem('uid');
+
+
       }else{
         alert("No tienes el saldo suficiente amigo :(, por favor realiza una recarga");
         document.getElementById("boton").disabled = true;
@@ -277,6 +289,10 @@ function calcular(x){
           //append the jbScanner to an existing DOM element
         jbScanner.appendTo(scannerParentElement);
       }        
+    }
+
+    function regresar(){
+      window.location.href = '../cashless.html';
     }
   </script>    
   </body>
