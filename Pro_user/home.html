@@ -35,8 +35,7 @@
     <li class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> MI CUENTA <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="plantilla.html"  style=" background-color: black;"><span class="glyphicon glyphicon-list-alt"></span> Subir Plantilla</a></li>
-          <li><a href="cashless.html"  style=" background-color: black;"><span class="glyphicon glyphicon-qrcode"></span>Cashless</a></li>
+          <li><a href="plantilla.html"  style=" background-color: black;"><span class="glyphicon glyphicon-list-alt"></span> Mercado Pago</a></li>
       <li><a href="#" onclick="logout()" style=" background-color: black;"><span class="glyphicon glyphicon-user"></span> Cerrar Sesión</a></li>
         </ul>
       </li>
@@ -61,7 +60,22 @@
 
 <!-- DIV DE INSTANCIA 2 DE VUE ++++++++++++++++++++++++++++++++++++++++++++++-->
 
-
+  <input type="text" id="filtrar" class="form-control" placeholder="Buscar ...">
+<div class="table">      
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Cantidad</th>
+                    <th>Producto</th>
+                    <th>Precio Unitario</th>
+                    <th>Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody id="tabla" class="buscar">
+                </tbody>
+              </table>
+              <h4 id="ey"></h4>
+              </div> 
   </div>
 </div>
 
@@ -131,8 +145,8 @@ firebase.auth().onAuthStateChanged(function(user) {
             if (doc.exists) {
               var myObject = doc.data();
         document.getElementById("minombre").innerHTML = "Bienvenido : " + myObject.fnombre + " " + myObject.fapellido;
-        document.getElementById("total").innerHTML = "Has Recargado :  <strong style='color: green;'>$" + myObject.dinero + "</strong>";
-        document.getElementById("resta").innerHTML = "Te queda : " ;
+       // document.getElementById("total").innerHTML = "Has Recargado :  <strong style='color: green;'>$" + myObject.dinero + "</strong>";
+        document.getElementById("resta").innerHTML = "Te quedan : <strong style='color: green;'>$" + myObject.dinero + "</strong>" ;
 
         console.log(doc.data())
             } else {
@@ -144,6 +158,42 @@ firebase.auth().onAuthStateChanged(function(user) {
         });
 
     
+
+    db.collection("users").doc(uid).collection("venta").get().then(function(querySnapshot) {
+  tabla.innerHTML = '';
+
+    querySnapshot.forEach(function(doc) {
+
+      var friendNum = 0;
+        while(friendNum < doc.data().venta.length) {
+         //   console.log(doc.data().venta[friendNum].detalle);
+
+             tabla.innerHTML += `
+                  <tr>
+                    <td>${doc.data().venta[friendNum].cantidades}</td>
+                    <td>${doc.data().venta[friendNum].detalle}</td>
+                    <td>${doc.data().venta[friendNum].preciounidad}</td>
+                    <td class="suma">${doc.data().venta[friendNum].preciosuma}</td>
+                  </tr>
+       ` 
+
+            friendNum++;
+        }
+
+
+
+    });
+
+ var totalDeuda = 0;
+            $(".suma").each(function(){
+              totalDeuda+=parseInt($(this).html()) || 0;
+           //   console.log(totalDeuda)
+            });
+ 
+   document.getElementById("ey").innerHTML = "Total: $" + totalDeuda;
+   //agregarTotal(identifiertable, dos, tres, suma, uno);
+    
+}); 
 
     if(user != null){
  
@@ -177,7 +227,41 @@ function logout(){
   firebase.auth().signOut();
 }
 
+$(document).ready(function () {
 
+            (function ($) {
+
+                $('#filtrar').keyup(function () {
+
+         //     var axa = 0;
+           // $(".suma").each(function(){
+             // axa+=parseInt($(this).html()) || 0;
+             // console.log(axa)
+            //});
+
+                    var rex = new RegExp($(this).val(), 'i');
+                  
+                    $('.buscar tr').hide();
+                    $('.buscar tr').filter(function () {
+                        return rex.test($(this).text());
+
+           
+
+ // tabla.innerHTML += `<tr><td><strong>Total</strong></td><td></td><td></td><td><strong id="ey"></strong></td></tr>` 
+   //document.getElementById("ey").innerHTML = totalDeuda;
+                          
+                    }).show();
+
+
+   
+                });
+
+
+
+            }(jQuery));
+             
+      
+        });
 
 </script>
 </body>
