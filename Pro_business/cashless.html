@@ -12,6 +12,25 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="../css/estilo.css">
   <script  src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.8/vue.min.js"></script>
+  <style type="text/css">
+    input[type=number]::-webkit-outer-spin-button,
+
+input[type=number]::-webkit-inner-spin-button {
+
+    -webkit-appearance: none;
+
+    margin: 0;
+
+}
+
+ 
+
+input[type=number] {
+
+    -moz-appearance:textfield;
+
+}
+  </style>
 
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
@@ -46,10 +65,10 @@
   </div>
 </nav>
 
-<div class="container">
+<div class="" style="padding: 5px;">
   <br><br>
  <span>Selecciona los productos a cobrar</span>
-  <div class=" table-responsive" id="app2">
+  <div class=" table" id="app2">
       <table class="table table-hover ">
         <input type="text" id="filtrar" class="form-control" placeholder="Buscar ...">
         <p id="peterpan"></p>
@@ -58,13 +77,13 @@
         <th>No</th>
         <th>Nombre del Producto</th>
         <th>Marca</th>
-        <th>Descripción</th>
+        <th>Detalle</th>
         <th>Precio</th>
       </tr>
     </thead>
     <tbody v-for="mensaje in mensajes" class="buscar" id="marcador">
       <tr onclick="myFunction(this)" style="cursor: pointer; color: black;">
-        <td><input type="text" onkeyup="myCantidad(this)" style="color: black; width: 50px;" class="numerow" :id="mensaje.key" maxlength="9" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ></td>
+        <td><input type="number" onkeyup="myCantidad(this)" style="color: black; width: 28px;" class="numerow" :id="mensaje.key" maxlength="9" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ></td>
         <td style="display: none;" class="llave">fireb{{mensaje.key}}</td>
         <td class="nombre">{{mensaje.nombre}}</td>
         <td class="marca">{{mensaje.marca}}</td>
