@@ -154,6 +154,7 @@ docRef = db.collection("users").doc(valor);
         });
 
 function sumar(x){
+  var valor = localStorage.getItem('uid');  
   var existe = parseFloat(x);
   var nuevo = parseFloat(monto);
   

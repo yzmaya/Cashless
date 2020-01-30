@@ -69,10 +69,12 @@ function cuentaNueva(){
 function guardarInfo(id){
   var nom = document.getElementById("nuevo_nombre").value;
   var apel = document.getElementById("nuevo_apellido").value;
+  var money = "0";
 
  db.collection('users').doc(""+id+"").set({
           fnombre: nom,
-          fapellido: apel
+          fapellido: apel,
+          dinero: money
           
       })
       .then(function(docRef) {
