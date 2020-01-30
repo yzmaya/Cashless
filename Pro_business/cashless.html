@@ -52,12 +52,12 @@ input[type=number] {
       <ul class="nav navbar-nav navbar-right">
        
     <li class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> MI CUENTA <span class="caret"></span></a>
+     <a class="dropdown-toggle" id="minombre" data-toggle="dropdown" href="#"></a>
         <ul class="dropdown-menu">
           <li><a href="home.html"  style=" background-color: black;"><span class="glyphicon glyphicon-book"></span> Catálogo de productos</a></li>
            <li><a href="plantilla.html"  style=" background-color: black;"><span class="glyphicon glyphicon-list-alt"></span> Subir Plantilla</a></li>
-           <li><a href="ventas.html"  style=" background-color: black;"><span class="glyphicon glyphicon-list-alt"></span> Ventas</a></li>
-      <li><a href="#" onclick="logout()" style=" background-color: black;"><span class="glyphicon glyphicon-user"></span> Cerrar Sesión</a></li>
+           <li><a href="ventas.html"  style=" background-color: black;"><span class="glyphicon glyphicon glyphicon-usd"></span> Ventas</a></li>
+      <li><a href="#" onclick="logout()" style=" background-color: black;"><span class="glyphicon glyphicon glyphicon-lock"></span> Cerrar Sesión</a></li>
         </ul>
       </li>
       </ul>
@@ -133,6 +133,7 @@ input[type=number] {
 <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
 
 <script>
   // Initialize Firebase
@@ -221,7 +222,23 @@ function logout(){
       if(valor==null){
          window.location.href = 'home.html';
         }else{
-          console.log(valor);
+              // console.log(valor);
+         var db = firebase.firestore();
+        docRef = db.collection("users").doc(valor);
+
+        docRef.get().then(function(doc) {
+            if (doc.exists) {
+              var myObject = doc.data();
+        document.getElementById("minombre").innerHTML ="<span class='glyphicon glyphicon-user'></span> " + myObject.fnombre + " " + myObject.fapellido + "<span class='caret'></span>";
+
+        //console.log(doc.data())
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }).catch(function(error) {
+            console.log("Error getting document:", error);
+        });
         }
 
     }

@@ -33,11 +33,14 @@
       <ul class="nav navbar-nav navbar-right">
        
     <li class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> MI CUENTA <span class="caret"></span></a>
+      <a class="dropdown-toggle" id="minombre" data-toggle="dropdown" href="#"></a>
         <ul class="dropdown-menu">
           <li><a href="home.html"  style=" background-color: black;"><span class="glyphicon glyphicon-book"></span> Catálogo de productos</a></li>
-           <li><a href="cashless.html"  style=" background-color: black;"><span class="glyphicon glyphicon-qrcode"></span>Cashless</a></li>
-      <li><a href="#" onclick="logout()" style=" background-color: black;"><span class="glyphicon glyphicon-user"></span> Cerrar Sesión</a></li>
+
+          
+           <li><a href="plantilla.html"  style=" background-color: black;"><span class="glyphicon glyphicon-list-alt"></span> Subir Plantilla</a></li>
+            <li><a href="cashless.html"  style=" background-color: black;"><span class="glyphicon glyphicon-qrcode"></span>Cashless</a></li>
+      <li><a href="#" onclick="logout()" style=" background-color: black;"><span class="glyphicon glyphicon glyphicon-lock"></span> Cerrar Sesión</a></li>
         </ul>
       </li>
       </ul>
@@ -111,14 +114,6 @@ var valor = localStorage.getItem('uiid');
 
    //var docReff = db.collection("users").doc(valor);
 
-db.collection("users").doc(valor).collection("ventaprov").get().then(function(querySnapshot) {
-    querySnapshot.forEach(function(doc) {
-        // doc.data() is never undefined for query doc snapshots
-        var myObject = doc.data();
-        console.log(doc.id, " => ", myObject.venta);
-    });
-});
-
 
 db.collection("users").doc(valor).collection("ventaprov").get().then(function(querySnapshot) {
   tabla.innerHTML = '';
@@ -157,16 +152,14 @@ db.collection("users").doc(valor).collection("ventaprov").get().then(function(qu
 }); 
     
 
-    docRef = db.collection("users").doc(valor);
+  docRef = db.collection("users").doc(valor);
 
         docRef.get().then(function(doc) {
             if (doc.exists) {
               var myObject = doc.data();
-        document.getElementById("minombre").innerHTML = "Bienvenido : " + myObject.fnombre + " " + myObject.fapellido;
-       // document.getElementById("total").innerHTML = "Has Recargado :  <strong style='color: green;'>$" + myObject.dinero + "</strong>";
-       // document.getElementById("resta").innerHTML = "Te queda : " ;
+        document.getElementById("minombre").innerHTML ="<span class='glyphicon glyphicon-user'></span> " + myObject.fnombre + " " + myObject.fapellido + "<span class='caret'></span>";
 
-       // console.log(doc.data())
+        //console.log(doc.data())
             } else {
                 // doc.data() will be undefined in this case
                 console.log("No such document!");

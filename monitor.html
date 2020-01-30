@@ -24,7 +24,10 @@
 <div class="" style="padding: 10px;">
   
   <!--<button onclick="logout()">Cerrar Sesión</button>       -->
-<input type="text" id="filtrar" class="form-control col-6-sm" placeholder="Buscar ..."><button onclick="printDiv('areaImprimir')">Imprimir</button>
+  <div style="text-align: right;">
+    <button onclick="printDiv('areaImprimir')">Imprimir</button><button onclick="logout()"><span class="glyphicon glyphicon-user"></span> Cerrar Sesión</button>
+  </div>
+<input type="text" id="filtrar" class="form-control col-6-sm" placeholder="Buscar ...">
  
  <div id="areaImprimir">
   <table class="table table-striped">
