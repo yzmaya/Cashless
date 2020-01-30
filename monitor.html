@@ -8,27 +8,49 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  
+    <style type="text/css" media="print">
+    div.page    {
+    writing-mode: tb-rl;
+    height: 80%;
+    margin: 10% 0%;
+    }
+    </style>
+
+
 </head>
 <body>
 
-<div class="container">
+<div class="" style="padding: 10px;">
   
   <!--<button onclick="logout()">Cerrar Sesión</button>       -->
-<input type="text" id="filtrar" class="form-control col-6-sm" placeholder="Buscar ..."><button>Imprimir</button>
+<input type="text" id="filtrar" class="form-control col-6-sm" placeholder="Buscar ..."><button onclick="printDiv('areaImprimir')">Imprimir</button>
  
+ <div id="areaImprimir">
   <table class="table table-striped">
     <thead>
-    <!--  <tr style="text-align: center;">
-        <th>ID</th>
-        <th colspan="2">Logo</th>
-        <th>QR</th>
-      </tr> -->
+  
       
     </thead>
     <tbody id="tabla" class="buscar"  style="text-align: center;">
     </tbody>
   </table>
 </div>
+
+
+</div>
+<script>
+  function printDiv(nombreDiv) {
+     var contenido= document.getElementById(nombreDiv).innerHTML;
+     var contenidoOriginal= document.body.innerHTML;
+
+     document.body.innerHTML = contenido;
+
+     window.print();
+
+     document.body.innerHTML = contenidoOriginal;
+}
+</script>
 
 <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>

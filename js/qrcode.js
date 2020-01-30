@@ -531,11 +531,14 @@ var QRCode;
 	 * @param {String} [vOption.colorDark="#000000"]
 	 * @param {String} [vOption.colorLight="#ffffff"]
 	 * @param {QRCode.CorrectLevel} [vOption.correctLevel=QRCode.CorrectLevel.H] [L|M|Q|H] 
+	 * FIREFOX SIN MARGENES, HORIZONTAL, A 2.5 CM 
+	 		width : 65, 
+			height : 65,
 	 */
 	QRCode = function (el, vOption) {
 		this._htOption = {
-			width : 69, 
-			height : 69,
+			width : 65, 
+			height : 65,
 			typeNumber : 4,
 			colorDark : "#000000",
 			colorLight : "#ffffff",

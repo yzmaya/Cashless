@@ -73,7 +73,7 @@ db.collection('users').get().then(function(querySnapshot) {
 
 
           tabla.innerHTML += `
-                  <tr> 
+                  <tr style='padding-top: 2px;'> 
                     <td id='${conteo}'>${doc.id}</td>
                     <td colspan='2'><img class="img-fluid" src='img/logo.png' /></td>
                     <td>${doc.data().fnombre} ${doc.data().fapellido}</td>
@@ -123,7 +123,7 @@ var i;
               console.log("error");
               
           }else{
-           // $("#descargarCodigo").css("display","inline-block");
+            //$("#descargarCodigo").css("display","inline-block");
             qr.makeCode(cadena);
           }
         };
