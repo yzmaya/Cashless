@@ -6,7 +6,9 @@ firebase.auth().onAuthStateChanged(function(user) {
 
     var user = firebase.auth().currentUser;
     console.log('usuario autentificado');
-    window.location.href = 'home.html';
+      var uid = user.uid;
+    localStorage.setItem('uiid',uid);
+       guardarInfo();
 
     if(user != null){
 
@@ -19,6 +21,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 
   }
 });
+
+var db = firebase.firestore();
 
 function login(){
 
@@ -41,10 +45,11 @@ function cuentaNueva(){
 
   var newEmail = document.getElementById('nuevo_email').value;
   var newPwd = document.getElementById('nuevo_pwd').value;
+  
 
   firebase.auth().createUserWithEmailAndPassword(newEmail, newPwd).catch(function(error) {
   // Handle Errors here.
-
+ 
 
   var errorCode = error.code;
   var errorMessage = error.message;
@@ -54,6 +59,38 @@ function cuentaNueva(){
 });
 }
 
+
+
+
+function guardarInfo(){
+  var xaja = localStorage.getItem('uiid');
+ var newStnd = document.getElementById('nuevo_estand').value;
+  var newName = document.getElementById('nuevo_nombre').value;
+
+
+ db.collection('suppliers').doc(xaja).set({
+          festand: newStnd,
+          fnombre: newName
+          
+      })
+      .then(function(docRef) {
+        //  console.log("Document written with ID: ", docRef.perfil);
+       window.location.href = 'home.html';
+        //***** COMENTA Y DESCOMENTA PARA VER EL MONITOR.HTML *****************************
+      
+        //logout();
+
+       // window.location.href = 'monitor.html';
+     //  document.getElementById("item_txt").value = id;
+       //$("#item_txt").focus();
+
+      })
+      .catch(function(error) {
+          console.error("Error adding document: ", error);
+      });
+
+
+};
 
 function restablecePwd(){
   var auth = firebase.auth();

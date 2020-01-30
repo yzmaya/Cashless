@@ -161,7 +161,7 @@ function calcular(x){
   
   if(parseFloat(nuevo)<=existe){
     //Se agrega el objeto a la sb con la compra realizada
-     db.collection('users').doc(id).collection("venta").add({
+     db.collection('users').doc(id).collection("compras").add({
           venta: array
           
       })
@@ -173,7 +173,7 @@ function calcular(x){
       });
     //se agrega una copia de los productos vendidos del proveedor a su base
 
-    db.collection('users').doc(idprov).collection("ventaprov").add({
+    db.collection('suppliers').doc(idprov).collection("ventas").add({
           venta: array
           
       })

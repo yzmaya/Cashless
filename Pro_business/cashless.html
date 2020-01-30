@@ -224,12 +224,12 @@ function logout(){
         }else{
               // console.log(valor);
          var db = firebase.firestore();
-        docRef = db.collection("users").doc(valor);
+        docRef = db.collection("suppliers").doc(valor);
 
         docRef.get().then(function(doc) {
             if (doc.exists) {
               var myObject = doc.data();
-        document.getElementById("minombre").innerHTML ="<span class='glyphicon glyphicon-user'></span> " + myObject.fnombre + " " + myObject.fapellido + "<span class='caret'></span>";
+        document.getElementById("minombre").innerHTML ="<span class='glyphicon glyphicon-user'></span> " + myObject.festand + "<span class='caret'></span>";
 
         //console.log(doc.data())
             } else {
