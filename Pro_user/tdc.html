@@ -52,43 +52,12 @@
   
 
 <span id="minombre"></span>
-<p id="total"></p>
-<p id="resta"></p>
 
 <!-- DIV DE INSTANCIA 2 DE VUE ++++++++++++++++++++++++++++++++++++++++++++++-->
 
-  <input type="text" id="filtrar" class="form-control" placeholder="Buscar ...">
-<div class="table">      
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>Cantidad</th>
-                    <th>Producto</th>
-                    <th>Precio Unitario</th>
-                    <th>Subtotal</th>
-                  </tr>
-                </thead>
-                <tbody id="tabla" class="buscar">
-                </tbody>
-              </table>
-              <h4 id="ey"></h4>
-              </div> 
-  </div>
+ 
 </div>
 
-
-<!-- 
-<div class="container-fluid bg-grey">
-  <div class="row">
-    <div class="col-sm-4">
-     
-    </div>
-    <div class="col-sm-8">
-      <h2>NUESTROS VALORES</h2><br>
-      <h4><strong>MISSION:</strong> Our mission lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4><br>
-    </div>
-  </div>
-</div> -->
 
 
 
@@ -141,11 +110,11 @@ firebase.auth().onAuthStateChanged(function(user) {
         docRef.get().then(function(doc) {
             if (doc.exists) {
               var myObject = doc.data();
-        document.getElementById("minombre").innerHTML = "Bienvenido : " + myObject.fnombre + " " + myObject.fapellido;
+       document.getElementById("minombre").innerHTML =  myObject.fnombre + " " + myObject.fapellido;
        document.getElementById("minombreu").innerHTML = "<span class='glyphicon glyphicon-user'></span> " + myObject.fnombre + " " + myObject.fapellido + "<span class='caret'></span>";
-        document.getElementById("resta").innerHTML = "Te quedan : <strong style='color: green;'>$" + myObject.dinero + "</strong>" ;
+    //    document.getElementById("resta").innerHTML = "Te quedan : <strong style='color: green;'>$" + myObject.dinero + "</strong>" ;
 
-        console.log(doc.data())
+      //  console.log(doc.data())
             } else {
                 // doc.data() will be undefined in this case
                 console.log("No such document!");
@@ -156,41 +125,6 @@ firebase.auth().onAuthStateChanged(function(user) {
 
     
 
-    db.collection("users").doc(uid).collection("venta").get().then(function(querySnapshot) {
-  tabla.innerHTML = '';
-
-    querySnapshot.forEach(function(doc) {
-
-      var friendNum = 0;
-        while(friendNum < doc.data().venta.length) {
-         //   console.log(doc.data().venta[friendNum].detalle);
-
-             tabla.innerHTML += `
-                  <tr>
-                    <td>${doc.data().venta[friendNum].cantidades}</td>
-                    <td>${doc.data().venta[friendNum].detalle}</td>
-                    <td>${doc.data().venta[friendNum].preciounidad}</td>
-                    <td class="suma">${doc.data().venta[friendNum].preciosuma}</td>
-                  </tr>
-       ` 
-
-            friendNum++;
-        }
-
-
-
-    });
-
- var totalDeuda = 0;
-            $(".suma").each(function(){
-              totalDeuda+=parseInt($(this).html()) || 0;
-           //   console.log(totalDeuda)
-            });
- 
-   document.getElementById("ey").innerHTML = "Total: $" + totalDeuda;
-   //agregarTotal(identifiertable, dos, tres, suma, uno);
-    
-}); 
 
     if(user != null){
  
@@ -207,7 +141,7 @@ window.location.href = 'index.html';
 
   var valor = localStorage.getItem('uiid');
 
-  const db = firebase.database();
+ 
 
 
 // ++++++++++++++++++++++++++ INSTANCIA 1 ++++++++++++++++++++++++++++++++++++++++++++++
@@ -217,41 +151,7 @@ function logout(){
   firebase.auth().signOut();
 }
 
-$(document).ready(function () {
 
-            (function ($) {
-
-                $('#filtrar').keyup(function () {
-
-         //     var axa = 0;
-           // $(".suma").each(function(){
-             // axa+=parseInt($(this).html()) || 0;
-             // console.log(axa)
-            //});
-
-                    var rex = new RegExp($(this).val(), 'i');
-                  
-                    $('.buscar tr').hide();
-                    $('.buscar tr').filter(function () {
-                        return rex.test($(this).text());
-
-           
-
- // tabla.innerHTML += `<tr><td><strong>Total</strong></td><td></td><td></td><td><strong id="ey"></strong></td></tr>` 
-   //document.getElementById("ey").innerHTML = totalDeuda;
-                          
-                    }).show();
-
-
-   
-                });
-
-
-
-            }(jQuery));
-             
-      
-        });
 
 </script>
 </body>
