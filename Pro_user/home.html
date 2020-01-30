@@ -156,7 +156,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
     
 
-    db.collection("users").doc(uid).collection("venta").get().then(function(querySnapshot) {
+    db.collection("users").doc(uid).collection("compras").get().then(function(querySnapshot) {
   tabla.innerHTML = '';
 
     querySnapshot.forEach(function(doc) {

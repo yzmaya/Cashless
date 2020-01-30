@@ -90,7 +90,7 @@ input[type=number] {
     <div class="form-group">
     <label class="control-label col-sm-2">Precio:</label>
       <div class="col-sm-10">
-        <input type="number" placeholder="precio" class="form-control" v-model="precio" maxlength="9" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" >
+        <input type="number" placeholder="precio" class="form-control" v-model="precio" maxlength="9" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" step="any" min="0">
       </div>
     </div>
     <div class="form-group">

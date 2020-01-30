@@ -115,7 +115,7 @@ var valor = localStorage.getItem('uiid');
    //var docReff = db.collection("users").doc(valor);
 
 
-db.collection("users").doc(valor).collection("ventaprov").get().then(function(querySnapshot) {
+db.collection("suppliers").doc(valor).collection("ventas").get().then(function(querySnapshot) {
   tabla.innerHTML = '';
 
     querySnapshot.forEach(function(doc) {
