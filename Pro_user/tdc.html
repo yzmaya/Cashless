@@ -11,7 +11,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="../css/estilo.css">
-  <script  src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.8/vue.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/estilos.css">
+
+
+  
 
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
@@ -48,16 +51,107 @@
 
 <!-- Container (About Section) -->
 <div id="about" class="container-fluid">
-  <div class="row">
+  
   
 
 <span id="minombre"></span>
 
+<div class="contenedor">
+<section class="tarjeta" id="tarjeta">
+      <div class="delantera">
+        <div class="logo-marca" id="logo-marca">
+          <!-- <img src="img/logos/visa.png" alt=""> -->
+        </div>
+        <img src="img/chip-tarjeta.png" class="chip" alt="">
+        <div class="datos">
+          <div class="grupo" id="numero">
+            <p class="label">Número Tarjeta</p>
+            <p class="numero">#### #### #### ####</p>
+          </div>
+          <div class="flexbox">
+            <div class="grupo" id="nombre">
+              <p class="label">Nombre Tarjeta</p>
+              <p class="nombre">Jhon Doe</p>
+            </div>
+
+            <div class="grupo" id="expiracion">
+              <p class="label">Expiracion</p>
+              <p class="expiracion"><span class="mes">MM</span> / <span class="year">AA</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="trasera">
+        <div class="barra-magnetica"></div>
+        <div class="datos">
+          <div class="grupo" id="firma">
+            <p class="label">Firma</p>
+            <div class="firma"><p></p></div>
+          </div>
+          <div class="grupo" id="ccv">
+            <p class="label">CCV</p>
+            <p class="ccv"></p>
+          </div>
+        </div>
+        <p class="leyenda">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus exercitationem, voluptates illo.</p>
+        <a href="#" class="link-banco">www.tubanco.com</a>
+      </div>
+    </section>
+
+    <!-- Contenedor Boton Abrir Formulario -->
+    <div class="contenedor-btn">
+      <button class="btn-abrir-formulario" id="btn-abrir-formulario">
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
+
+    <!-- Formulario -->
+    <form action="" id="formulario-tarjeta" class="formulario-tarjeta">
+      <div class="grupo">
+        <label for="inputNumero">Número Tarjeta</label>
+        <input type="text" id="inputNumero" maxlength="19" autocomplete="off" name = "checkout.cardNumber" >
+        <div id="type" style="color: red;"></div>
+      </div>
+      <div class="grupo">
+        <label for="inputNombre">Nombre</label>
+        <input type="text" id="inputNombre" maxlength="19" autocomplete="off">
+      </div>
+      <div class="flexbox">
+        <div class="grupo expira">
+          <label for="selectMes">Expiracion</label>
+          <div class="flexbox">
+            <div class="grupo-select">
+              <select name="mes" id="selectMes">
+                <option disabled selected>Mes</option>
+              </select>
+              <i class="fas fa-angle-down"></i>
+            </div>
+            <div class="grupo-select">
+              <select name="year" id="selectYear">
+                <option disabled selected>Año</option>
+              </select>
+              <i class="fas fa-angle-down"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="grupo ccv">
+          <label for="inputCCV">CCV</label>
+          <input type="text" id="inputCCV" maxlength="3">
+        </div>
+      </div>
+      
+    </form>
+    <div class="col-6 col-md-4">
+  <button type="" class="btn btn-success btn-enviar" id="botontdc">Enviar</button>
+  
+</div>
+  </div>
+
 <!-- DIV DE INSTANCIA 2 DE VUE ++++++++++++++++++++++++++++++++++++++++++++++-->
 
- 
 </div>
-
 
 
 
@@ -76,6 +170,234 @@
 <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
 <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
+<script type="text/javascript">
+  const tarjeta = document.querySelector('#tarjeta'),
+    btnAbrirFormulario = document.querySelector('#btn-abrir-formulario'),
+    formulario = document.querySelector('#formulario-tarjeta'),
+    numeroTarjeta = document.querySelector('#tarjeta .numero'),
+    nombreTarjeta = document.querySelector('#tarjeta .nombre'),
+    logoMarca = document.querySelector('#logo-marca'),
+    firma = document.querySelector('#tarjeta .firma p'),
+    mesExpiracion = document.querySelector('#tarjeta .mes'),
+    yearExpiracion = document.querySelector('#tarjeta .year');
+    ccv = document.querySelector('#tarjeta .ccv');
+
+// * Volteamos la tarjeta para mostrar el frente.
+const mostrarFrente = () => {
+  if(tarjeta.classList.contains('active')){
+    tarjeta.classList.remove('active');
+  }
+}
+
+// * Rotacion de la tarjeta
+tarjeta.addEventListener('click', () => {
+  tarjeta.classList.toggle('active');
+});
+
+// * Boton de abrir formulario
+btnAbrirFormulario.addEventListener('click', () => {
+  btnAbrirFormulario.classList.toggle('active');
+  formulario.classList.toggle('active');
+});
+
+// * Select del mes generado dinamicamente.
+for(let i = 1; i <= 12; i++){
+  let opcion = document.createElement('option');
+  opcion.value = i;
+  opcion.innerText = i;
+  formulario.selectMes.appendChild(opcion);
+}
+
+// * Select del año generado dinamicamente.
+const yearActual = new Date().getFullYear();
+for(let i = yearActual; i <= yearActual + 8; i++){
+  let opcion = document.createElement('option');
+  opcion.value = i;
+  opcion.innerText = i;
+  formulario.selectYear.appendChild(opcion);
+}
+
+// * Input numero de tarjeta
+formulario.inputNumero.addEventListener('keyup', (e) => {
+  let valorInput = e.target.value;
+
+  formulario.inputNumero.value = valorInput
+  // Eliminamos espacios en blanco
+  .replace(/\s/g, '')
+  // Eliminar las letras
+  .replace(/\D/g, '')
+  // Ponemos espacio cada cuatro numeros
+   //.replace(/([0-9]{4})/g, '$1 ')
+  // Elimina el ultimo espaciado
+  .trim();
+
+  numeroTarjeta.textContent = valorInput;
+
+  if(valorInput == ''){
+    numeroTarjeta.textContent = '#### #### #### ####';
+
+    logoMarca.innerHTML = '';
+  }
+
+  if(valorInput[0] == 4){
+    logoMarca.innerHTML = '';
+    const imagen = document.createElement('img');
+    imagen.src = 'img/logos/visa.png';
+    logoMarca.appendChild(imagen);
+  } else if(valorInput[0] == 5){
+    logoMarca.innerHTML = '';
+    const imagen = document.createElement('img');
+    imagen.src = 'img/logos/mastercard.png';
+    logoMarca.appendChild(imagen);
+  }
+
+  // Volteamos la tarjeta para que el usuario vea el frente.
+  mostrarFrente();
+});
+
+// * Input nombre de tarjeta
+formulario.inputNombre.addEventListener('keyup', (e) => {
+  let valorInput = e.target.value;
+
+  formulario.inputNombre.value = valorInput.replace(/[0-9]/g, '');
+  nombreTarjeta.textContent = valorInput;
+  firma.textContent = valorInput;
+
+  if(valorInput == ''){
+    nombreTarjeta.textContent = 'Jhon Doe';
+  }
+
+  mostrarFrente();
+});
+
+// * Select mes
+formulario.selectMes.addEventListener('change', (e) => {
+  mesExpiracion.textContent = e.target.value;
+  mostrarFrente();
+});
+
+// * Select Año
+formulario.selectYear.addEventListener('change', (e) => {
+  yearExpiracion.textContent = e.target.value.slice(2);
+  mostrarFrente();
+});
+
+// * CCV
+formulario.inputCCV.addEventListener('keyup', () => {
+  if(!tarjeta.classList.contains('active')){
+    tarjeta.classList.toggle('active');
+  }
+
+  formulario.inputCCV.value = formulario.inputCCV.value
+  // Eliminar los espacios
+  .replace(/\s/g, '')
+  // Eliminar las letras
+  .replace(/\D/g, '');
+
+  ccv.textContent = formulario.inputCCV.value;
+});
+</script>
+
+<script>
+$("#inputNumero").keyup(function(e) {
+  var num = $(this).val().toString();
+  var charCount = num.length;
+
+  /* VALIDACION DE TIPO */
+  if (charCount == 1) {
+    if (num == "4") {
+      $("#type").html("VISA");
+    }
+  }
+  if (charCount == 2) {
+    if (num == "34" || num == "37") {
+      $("#type").html("AMEX");
+    } else if (num == "51" || num == "55" || num == "53") {
+      $("#type").html("MASTER CARD");
+    } else if (num == "55") {
+      $("#type").html("DISCOVER");
+    }
+  }
+  if (charCount == 3) {
+    if (num == "644") {
+      $("#type").html("DISCOVER")
+    }
+  }
+  if (charCount == 4) {
+    if (num == "6011") {
+      $("#type").html("DISCOVER");
+    }
+  }
+  /* !VALIDACION DE TIPO */
+
+  /* ALGORITMO */
+  if (charCount == 13 || charCount == 14 || charCount == 15 || charCount == 16) {
+    var valid = isValid(num, charCount);
+    if (valid) {
+      $("#type").html("valida");
+      $("input").attr("name", "checkout.cardNumber").attr("class", "valid-card");
+      $("#inputNombre").prop("disabled", false);
+      $("#selectMes").prop("disabled", false);
+      $("#selectYear").prop("disabled", false);
+      $("#inputCCV").prop("disabled", false);
+      $("#botontdc").prop("disabled", false);
+      var botonEnviar = document.getElementById('botontdc');
+        botonEnviar.disabled = false;
+    } else {
+      $("#type").html("número de tarjeta invalido");
+      $("input").attr("name", "checkout.cardNumber").attr("class", "invalid-card");
+      $("#inputNombre").prop("disabled", true);
+      $("#selectMes").prop("disabled", true);
+      $("#selectYear").prop("disabled", true);
+      $("#inputCCV").prop("disabled", true);
+      $("#inputCCV").prop("disabled", true); 
+      var botonEnviar = document.getElementById('botontdc');
+        botonEnviar.disabled = true;
+
+    }
+  }
+  /* !ALGORITMO */
+});
+
+function isValid(ccNum, charCount) {
+  var double = true;
+  var numArr = [];
+  var sumTotal = 0;
+  for (i = 0; i < charCount; i++) {
+    var digit = parseInt(ccNum.charAt(i));
+
+    if (double) {
+      digit = digit * 2;
+      digit = toSingle(digit);
+      double = false;
+    } else {
+      double = true;
+    }
+    numArr.push(digit);
+  }
+
+
+  for (i = 0; i < numArr.length; i++) {
+    sumTotal += numArr[i];
+  }
+  var diff = eval(sumTotal % 10);
+  console.log(diff);
+  console.log(diff == "0");
+  return (diff == "0");
+}
+
+function toSingle(digit) {
+  if (digit > 9) {
+    var tmp = digit.toString();
+    var d1 = parseInt(tmp.charAt(0));
+    var d2 = parseInt(tmp.charAt(1));
+    return (d1 + d2);
+  } else {
+    return digit;
+  }
+}
+
+</script>
 <script>
   // Initialize Firebase
   var config = {
