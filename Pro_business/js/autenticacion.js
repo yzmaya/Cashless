@@ -45,18 +45,37 @@ function cuentaNueva(){
 
   var newEmail = document.getElementById('nuevo_email').value;
   var newPwd = document.getElementById('nuevo_pwd').value;
+   var newStnd = document.getElementById('nuevo_estand').value;
+  var newName = document.getElementById('nuevo_nombre').value;
   
+    if(newStnd == ''){
+    alert('llena los campos faltantes');
+    $("#nuevo_estand").focus();
+
+    
+  }else if(newName == ''){
+    alert('llena los campos faltantes');
+    $("#nuevo_nombre").focus();
+  }else{
+
 
   firebase.auth().createUserWithEmailAndPassword(newEmail, newPwd).catch(function(error) {
   // Handle Errors here.
- 
+
 
   var errorCode = error.code;
   var errorMessage = error.message;
   // ...
 
   window.alert(errorMessage);
+  $("#nuevo_email").focus();
 });
+
+//aqui termina else
+ };
+
+
+
 }
 
 
@@ -67,6 +86,14 @@ function guardarInfo(){
  var newStnd = document.getElementById('nuevo_estand').value;
   var newName = document.getElementById('nuevo_nombre').value;
 
+
+
+
+
+if(newStnd == ''){
+  //console.log("no haz llenado nada");
+  window.location.href = 'home.html';
+}else{
 
  db.collection('suppliers').doc(xaja).set({
           festand: newStnd,
@@ -89,7 +116,7 @@ function guardarInfo(){
           console.error("Error adding document: ", error);
       });
 
-
+}
 };
 
 function restablecePwd(){
