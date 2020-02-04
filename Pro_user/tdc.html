@@ -51,9 +51,9 @@
 
 <!-- Container (About Section) -->
 
-  <div class="" style="padding-top: 30px;">
+  <div class="" style="padding-top: 20px; padding-left: 10px;">
   
-
+    <br><br>
 <span id="minombre"></span>
 
 <div class="contenedor">
@@ -136,15 +136,22 @@
           </div>
         </div>
 
+
+
         <div class="grupo ccv">
           <label for="inputCCV">CCV</label>
           <input type="text" id="inputCCV" maxlength="3">
         </div>
       </div>
+
+         <div class="grupo">
+        <label for="inputMonto">Monto de la Recarga</label>
+        <input type="number" id="inputMonto" maxlength="19" autocomplete="off" placeholder="$0" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
+      </div>
       
     </form>
     <div class="col-6 col-md-4">
-  <button type="" class="btn btn-success btn-enviar" id="botontdc">Enviar</button>
+  <button type="" class="btn btn-success btn-enviar" id="botontdc" onclick="preprchs()"  class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Guardar</button>
   
 </div>
   </div>
@@ -152,7 +159,28 @@
 <!-- DIV DE INSTANCIA 2 DE VUE ++++++++++++++++++++++++++++++++++++++++++++++-->
 </div>
 
-
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p id="minombre"></p>
+          <p id="mensajepersonal"></p>
+        </div>
+        
+        <div class="modal-footer">
+           <button type="button" class="btn btn-success" onclick="prchs()" data-dismiss="modal">Recargar</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 
 
 
@@ -171,6 +199,10 @@
 <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
 <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
 <script type="text/javascript">
+
+
+
+
   const tarjeta = document.querySelector('#tarjeta'),
     btnAbrirFormulario = document.querySelector('#btn-abrir-formulario'),
     formulario = document.querySelector('#formulario-tarjeta'),
@@ -341,7 +373,9 @@ $("#inputNumero").keyup(function(e) {
       $("#selectYear").prop("disabled", false);
       $("#inputCCV").prop("disabled", false);
       $("#botontdc").prop("disabled", false);
+      $("#inputMonto").prop("disabled", true); 
       var botonEnviar = document.getElementById('botontdc');
+
         botonEnviar.disabled = false;
     } else {
       $("#type").html("número de tarjeta invalido");
@@ -350,7 +384,9 @@ $("#inputNumero").keyup(function(e) {
       $("#selectMes").prop("disabled", true);
       $("#selectYear").prop("disabled", true);
       $("#inputCCV").prop("disabled", true);
-      $("#inputCCV").prop("disabled", true); 
+      $("#inputMonto").prop("disabled", true); 
+      $("#botontdc").prop("disabled", true); 
+     
       var botonEnviar = document.getElementById('botontdc');
         botonEnviar.disabled = true;
 
@@ -432,7 +468,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         docRef.get().then(function(doc) {
             if (doc.exists) {
               var myObject = doc.data();
-       document.getElementById("minombre").innerHTML =  myObject.fnombre + " " + myObject.fapellido;
+       document.getElementById("minombre").innerHTML = "Bienvenido : " +  myObject.fnombre + " " + myObject.fapellido;
        document.getElementById("minombreu").innerHTML = "<span class='glyphicon glyphicon-user'></span> " + myObject.fnombre + " " + myObject.fapellido + "<span class='caret'></span>";
     //    document.getElementById("resta").innerHTML = "Te quedan : <strong style='color: green;'>$" + myObject.dinero + "</strong>" ;
 
@@ -459,6 +495,64 @@ firebase.auth().onAuthStateChanged(function(user) {
 window.location.href = 'index.html';
   }
 });
+
+function preprchs(){
+
+  var monto = document.getElementById('inputMonto').value;
+  document.getElementById('mensajepersonal').innerHTML = 
+  "Te recordamos que para poder efectuar esta recarga, se cobrará un 2.9% + $2.50 sobre tu monto ($ " + monto + " ), Si estás de acuerdo, por favor da click en Recargar"
+}
+
+function prchs(){
+   var monto = document.getElementById('inputMonto').value;
+ var db = firebase.firestore();
+
+if(monto == ''){
+  alert('necesitas llenar el campo de monto de recarga');
+
+}else{
+docRef = db.collection("users").doc(valor);
+
+        docRef.get().then(function(doc) {
+            if (doc.exists) {
+              var myObject = doc.data();
+             var montoactual =  myObject.dinero;
+
+             sumar(montoactual);
+      
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }).catch(function(error) {
+            console.log("Error getting document:", error);
+        });
+
+
+
+function sumar(x){
+   var monto = document.getElementById('inputMonto').value;
+   
+  var existe = parseFloat(x);
+  var nuevo = parseFloat(monto);
+  
+  existe += nuevo
+
+        db.collection("users").doc(valor).update({
+            dinero: existe
+        })
+        .then(function(docRef) {
+            //console.log("Document written with ID: ", db.id);
+            alert("Tu recarga se ha realizado con éxito!")
+        })
+        .catch(function(error) {
+            console.error("Error adding document: ", error);
+        });
+
+};
+
+}
+  }
 
 
   var valor = localStorage.getItem('uiid');
