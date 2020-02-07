@@ -23,7 +23,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 function login(){
 
   var userEmail = document.getElementById('campo_email').value;
-  var userPwd = document.getElementById('campo_pwd').value;
+  var userPwd = "admin1"
 
   firebase.auth().signInWithEmailAndPassword(userEmail, userPwd).catch(function(error) {
     // Handle Errors here.
@@ -37,22 +37,7 @@ function login(){
 
 }
 
-function cuentaNueva(){
 
-  var newEmail = document.getElementById('nuevo_email').value;
-  var newPwd = document.getElementById('nuevo_pwd').value;
-
-  firebase.auth().createUserWithEmailAndPassword(newEmail, newPwd).catch(function(error) {
-  // Handle Errors here.
-
-
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  // ...
-
-  window.alert(errorMessage);
-});
-}
 
 
 function restablecePwd(){

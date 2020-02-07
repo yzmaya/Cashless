@@ -57,11 +57,26 @@ function cuentaNueva(){
 
   window.alert(errorMessage);
   $("#nuevo_email").focus();
-});
+})
+  .then(function(){
+    enviarcorreodeverificacion();
+  });
 
 //aqui termina else
  };
 
+};
+
+
+
+function enviarcorreodeverificacion(){
+  var user = firebase.auth().currentUser;
+
+  user.sendEmailVerification().then(function(){
+
+  }).catch(function(error){
+    console.log(error);
+  })
 }
 
 
