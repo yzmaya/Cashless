@@ -73,7 +73,7 @@ db.collection('users').get().then(function(querySnapshot) {
 
 
           tabla.innerHTML += `
-                  <tr style='padding-top: 2px;'> 
+                  <tr> 
                     <td id='${conteo}'>${doc.id}</td>
                     <td colspan='2'><img class="img-fluid" src='img/logo.png' /></td>
                     <td>${doc.data().fnombre} ${doc.data().fapellido}</td>
