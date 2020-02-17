@@ -1,7 +1,0 @@
-.settings/
-*.class
-war/WEB-INF/classes/
-war/WEB-INF/lib/
-gwt-unitCache/
-war/jsqrscanner/
-war/WEB-INF/deploy/
