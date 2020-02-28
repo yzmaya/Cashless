@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <!-- Theme Made By www.w3schools.com - No Copyright -->
   <title>Usuario</title>
@@ -11,211 +12,163 @@
   <script src="../bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="../css/estilo.css">
   <link rel="stylesheet" type="text/css" href="css/estilos.css">
-
-
-  
-
 </head>
+
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
-<nav class="navbar navbar-default navbar-fixed-top">
+  <nav class="navbar navbar-default navbar-fixed-top">
 
 
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#myPage">Logo</a>
-      <span id="myid"></span>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav navbar-right">
-       
-    <li class="dropdown">
-      <a class="dropdown-toggle" id="minombreu" data-toggle="dropdown" href="#"></a>
-        <ul class="dropdown-menu">
-          <li><a href="home.html"  style=" background-color: black;"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
-          <li><a href="merpay.html"  style=" background-color: black;"><span class="glyphicon glyphicon-usd"></span> Mercado Pago</a></li>
-      <li><a href="#" onclick="logout()" style=" background-color: black;"><span class="glyphicon glyphicon-lock"></span> Cerrar Sesión</a></li>
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#myPage">Logo</a>
+        <span id="myid"></span>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+
+          <li class="dropdown">
+            <a class="dropdown-toggle" id="minombreu" data-toggle="dropdown" href="#"></a>
+            <ul class="dropdown-menu">
+              <li><a href="home.html" style=" background-color: black;"><span class="glyphicon glyphicon-home"></span>
+                  Inicio</a></li>
+              <li><a href="merpay.html" style=" background-color: black;"><span class="glyphicon glyphicon-usd"></span>
+                  Mercado Pago</a></li>
+              <li><a href="#" onclick="logout()" style=" background-color: black;"><span
+                    class="glyphicon glyphicon-lock"></span> Cerrar Sesión</a></li>
+            </ul>
+          </li>
         </ul>
-      </li>
-      </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
 
 
 
   <div class="container">
-  
+
     <br><br>
     <span id="minombre"></span>
+    <p id="backend"></p>
     <br>
-    <iframe class="container" src="http://localhost:5000/openpay_tarjeta" frameborder="0" height="695px">
+    <!--    <iframe class="container" src="http://localhost:5000/openpay_tarjeta" frameborder="0" height="695px">
 
     </iframe>
-  
-  
+  -->
+    <form action="http://localhost:5000/gol/" method="POST">
+      <input type="hidden" name="uid" id="iduid">
+      <button type="submit" class="btn-success"><span class="glyphicon glyphicon-lock"></span> Recargar de manera segura</button>
+
+    </form>
+
   </div>
 
 
 
 
 
-<footer class="container-fluid text-center">
-  <a href="#myPage" title="To Top">
-    <span class="glyphicon glyphicon-chevron-up"></span>
-  </a>
-  <p>Copyright 2020</p>
-</footer>
+  <footer class="container-fluid text-center">
+    <a href="#myPage" title="To Top">
+      <span class="glyphicon glyphicon-chevron-up"></span>
+    </a>
+    <p>Copyright 2020</p>
+  </footer>
 
 
 
-<!-- AQUI EMPIEZA SCERIPT DE VUE AND FIREBASE-->
-<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
+  <!-- AQUI EMPIEZA SCERIPT DE VUE AND FIREBASE-->
+  <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
 
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDI6U0vWBHZY0pdkzbQd0NRqpcfY3uPrrk",
-    authDomain: "cashless-c8e7b.firebaseapp.com",
-    databaseURL: "https://cashless-c8e7b.firebaseio.com",
-    projectId: "cashless-c8e7b",
-    storageBucket: "cashless-c8e7b.appspot.com",
-    messagingSenderId: "482722912691",
-    appId: "1:482722912691:web:f8395fd37fef973f7ad3c6",
-    measurementId: "G-QLM4ZSX74X"
-  };
-  firebase.initializeApp(config);
-
-
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDI6U0vWBHZY0pdkzbQd0NRqpcfY3uPrrk",
+      authDomain: "cashless-c8e7b.firebaseapp.com",
+      databaseURL: "https://cashless-c8e7b.firebaseio.com",
+      projectId: "cashless-c8e7b",
+      storageBucket: "cashless-c8e7b.appspot.com",
+      messagingSenderId: "482722912691",
+      appId: "1:482722912691:web:f8395fd37fef973f7ad3c6",
+      measurementId: "G-QLM4ZSX74X"
+    };
+    firebase.initializeApp(config);
 
 
-    // User is signed in.
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
 
-    var user = firebase.auth().currentUser;
-    console.log('usuario autentificado');
 
-    var uid = user.uid;
-    //document.getElementById("myid").innerHTML = uid;
-    localStorage.setItem('uiid', uid);
-    var db = firebase.firestore();
+        // User is signed in.
 
-    docRef = db.collection("users").doc(uid);
+        var user = firebase.auth().currentUser;
+        console.log('usuario autentificado');
 
-        docRef.get().then(function(doc) {
-            if (doc.exists) {
-              var myObject = doc.data();
-       document.getElementById("minombre").innerHTML = "Bienvenido : " +  myObject.fnombre + " " + myObject.fapellido;
-       document.getElementById("minombreu").innerHTML = "<span class='glyphicon glyphicon-user'></span> " + myObject.fnombre + " " + myObject.fapellido + "<span class='caret'></span>";
-    //    document.getElementById("resta").innerHTML = "Te quedan : <strong style='color: green;'>$" + myObject.dinero + "</strong>" ;
+        var uid = user.uid;
+        //document.getElementById("myid").innerHTML = uid;
+        localStorage.setItem('uiid', uid);
+        var db = firebase.firestore();
 
-      //  console.log(doc.data())
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-            }
-        }).catch(function(error) {
-            console.log("Error getting document:", error);
+        docRef = db.collection("users").doc(uid);
+
+        docRef.get().then(function (doc) {
+          if (doc.exists) {
+            var myObject = doc.data();
+            document.getElementById("minombre").innerHTML = "Bienvenido : " + myObject.fnombre + " " + myObject.fapellido;
+            document.getElementById("minombreu").innerHTML = "<span class='glyphicon glyphicon-user'></span> " + myObject.fnombre + " " + myObject.fapellido + "<span class='caret'></span>";
+            //    document.getElementById("resta").innerHTML = "Te quedan : <strong style='color: green;'>$" + myObject.dinero + "</strong>" ;
+
+            //  console.log(doc.data())
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+          }
+        }).catch(function (error) {
+          console.log("Error getting document:", error);
         });
 
-    
 
 
-    if(user != null){
- 
+
+        if (user != null) {
+
+        }
+
+      } else {
+        // No user is signed in.
+
+        console.log('usuario no logueadox')
+        window.location.href = 'index.html';
+      }
+    });
+/*
+  
+*/
+
+    var valor = localStorage.getItem('uiid');
+    document.getElementById('iduid').value = valor;
+
+
+
+
+    // ++++++++++++++++++++++++++ INSTANCIA 1 ++++++++++++++++++++++++++++++++++++++++++++++
+
+    function logout() {
+      localStorage.clear();
+      firebase.auth().signOut();
     }
 
-  } else {
-    // No user is signed in.
-
-    console.log('usuario no logueadox')
-window.location.href = 'index.html';
-  }
-});
-
-function preprchs(){
-
-  var monto = document.getElementById('inputMonto').value;
-  document.getElementById('mensajepersonal').innerHTML = 
-  "Te recordamos que para poder efectuar esta recarga, se cobrará un 2.9% + $2.50 sobre tu monto ($ " + monto + " ), Si estás de acuerdo, por favor da click en Recargar"
-}
-
-function prchs(){
-   var monto = document.getElementById('inputMonto').value;
- var db = firebase.firestore();
-
-if(monto == ''){
-  alert('necesitas llenar el campo de monto de recarga');
-
-}else{
-docRef = db.collection("users").doc(valor);
-
-        docRef.get().then(function(doc) {
-            if (doc.exists) {
-              var myObject = doc.data();
-             var montoactual =  myObject.dinero;
-
-             sumar(montoactual);
-      
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-            }
-        }).catch(function(error) {
-            console.log("Error getting document:", error);
-        });
 
 
-
-function sumar(x){
-   var monto = document.getElementById('inputMonto').value;
-   
-  var existe = parseFloat(x);
-  var nuevo = parseFloat(monto);
-  
-  existe += nuevo
-
-        db.collection("users").doc(valor).update({
-            dinero: existe
-        })
-        .then(function(docRef) {
-            //console.log("Document written with ID: ", db.id);
-            alert("Tu recarga se ha realizado con éxito!")
-        })
-        .catch(function(error) {
-            console.error("Error adding document: ", error);
-        });
-
-};
-
-}
-  }
-
-
-  var valor = localStorage.getItem('uiid');
-
- 
-
-
-// ++++++++++++++++++++++++++ INSTANCIA 1 ++++++++++++++++++++++++++++++++++++++++++++++
-
-function logout(){
-  localStorage.clear();
-  firebase.auth().signOut();
-}
-
-
-
-</script>
+  </script>
 </body>
+
 </html>
