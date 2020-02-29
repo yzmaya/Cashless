@@ -84,11 +84,13 @@ function enviarcorreodeverificacion(){
 function guardarInfo(id){
   var nom = document.getElementById("nuevo_nombre").value;
   var apel = document.getElementById("nuevo_apellido").value;
+  var correo = document.getElementById("nuevo_email").value;
   var money = "0";
 
  db.collection('users').doc(""+id+"").set({
           fnombre: nom,
           fapellido: apel,
+          fcorreo: correo,
           dinero: money
           
       })
