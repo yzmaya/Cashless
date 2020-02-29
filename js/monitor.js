@@ -67,7 +67,7 @@ function mostrarDatos() {
       tabla.innerHTML += `
                   <tr> 
                     <td style="display: none" id='${conteo}'>${doc.id}</td>
-                    <td>myevent.com</td>
+                    <td>www.myevent.com</td>
                     <td colspan='2'><img class="img-fluid" src='img/logo.png' height="82px"/></td>
                     <td>${doc.data().fnombre} ${doc.data().fapellido}</td>
                     <td id='codigoQR${conteo}'></td>
