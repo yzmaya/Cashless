@@ -6,8 +6,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 
     var user = firebase.auth().currentUser;
     console.log('usuario autentificado');
-    window.location.href = 'https://yzmaya.github.io/Cashless/Pro_sign/docs/';
-
+    //window.location.href = 'https://yzmaya.github.io/Cashless/Pro_sign/docs/';
+    window.location.href = 'home.html';
     if(user != null){
 
     }
