@@ -46,14 +46,22 @@
 
 <div class="container">
   <br><br>
-  <h1>Sube tu archivo plantilla.xlsm</h1>
-  <span>Si aún no lo tienes, descargalo <a href="../img/plantilla.xlsm" target="_blank">aquí</a></span>
-  <br><br><br>
+  <h1>Pega tu información</h1>
+  <span>Copia y pega la información obtenida por tu archivo plantilla.xlsm, si no sabes como hacer da clic <a href="">aqui</a></span><br>
+  <span>Si aún no tienes tu plantilla.xlsm descargalo <a href="../img/plantilla.xlsm" target="_blank">aquí</a></span>
+  <br>
+  <!--
   <div class="col-12" id="imagenes">
    <input type="file" accept="xlsm" value="upload" id="fileButton" size="1" required="" />
       <progress value="0" max="100" id="uploader">0%</progress>
   </div>
 <p id="leyenda" style="display: none; color: green;">Tu archivo, se ha enviado exitosamente!</p>
+-->
+<h3>Pega la información obtenida por tu excel</h3>
+<textarea id="textarea">
+
+</textarea><br>
+<button class="btn btn-success" onclick="json1()">Subir</button>
 </div>
 
 
@@ -111,12 +119,45 @@ window.location.href = 'index.html';
 
 
   var valor = localStorage.getItem('uiid');
+console.log(valor);
 
+function json1(){
+  var arrayOfLines = $('#textarea').val().split('\n');
+  console.log(arrayOfLines);
+  for(i=0;i<arrayOfLines.length;i++){
+
+    //for(j=0;j=3;j++){
+    //console.log('soyla iteracion' + i + arrayOfLines[i].split(','));
+   // }
+   var algo = arrayOfLines[i].split(',');
+
+   //console.log(arrayOfLines[i].split(','));
+
+   firebase.database().ref('users/' + valor).push({
+    uno: algo[0].trim(),
+    dos: algo[1].trim(),
+    res : algo[2].trim(),
+    cuatro: algo[3].trim()
+  }, function(error) {
+    if (error) {
+      console.log('The write failed...');
+    } else {
+      console.log('Data saved successfully!');
+      
+    }
+  });
+
+   
+   }
+}
+
+function json(){
 
   
+  
+};
 
-
-      
+     /*
       // Vigilar selección archivo
       fileButton.addEventListener('change', function(e) {
        
@@ -156,7 +197,7 @@ var agregar = storageRef.child(valor + '/'  + file.name);
 }
   )
       });
-
+*/
 
 function logout(){
   localStorage.clear();
