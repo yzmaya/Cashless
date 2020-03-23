@@ -134,10 +134,11 @@ function json1(){
    //console.log(arrayOfLines[i].split(','));
 
    firebase.database().ref('users/' + valor).push({
-    uno: algo[0].trim(),
-    dos: algo[1].trim(),
-    res : algo[2].trim(),
-    cuatro: algo[3].trim()
+    nombre: algo[0].trim(),
+    precio: algo[1].trim(),
+    marca: algo[2].trim(),
+    detalles: algo[3].trim(),
+    stock: algo[4].trim()
   }, function(error) {
     if (error) {
       console.log('The write failed...');
@@ -151,11 +152,6 @@ function json1(){
    }
 }
 
-function json(){
-
-  
-  
-};
 
      /*
       // Vigilar selección archivo
