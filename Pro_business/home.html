@@ -105,6 +105,15 @@
               <input type="text" class="form-control" placeholder="Descripción del producto" v-model="detalles">
             </div>
           </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2">Existencia:</label>
+            <div class="col-sm-10">
+              <input type="number" placeholder="Cantidad en existencia" class="form-control" v-model="stock" maxlength="9"
+                onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" step="any"
+                min="0">
+            </div>
+          </div>
+          
 
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
@@ -128,6 +137,7 @@
           <th>Marca</th>
           <th>Precio</th>
           <th>Detalle</th>
+          <th>Stock</th>
           <th>Borrar</th>
         </tr>
       </thead>
@@ -137,6 +147,7 @@
           <td contenteditable="true" @blur="editarMarca($event, mensaje.key)">{{mensaje.marca}}</td>
           <td contenteditable="true" @blur="editarPrecio($event, mensaje.key)">{{mensaje.precio}}</td>
           <td contenteditable="true" @blur="editarDetalles($event, mensaje.key)">{{mensaje.detalles}}</td>
+          <td contenteditable="true" @blur="editarExistencia($event, mensaje.key)">{{mensaje.stock}}</td>
           <td><button @click="eliminarMensaje(mensaje.key)" class="glyphicon glyphicon-trash"></button></td>
         </tr>
 
@@ -145,7 +156,7 @@
     <!--    <pre>{{$data}}</pre> -->
 
   </div>
-  <a href="../img/plantilla.xlsm" target="_blank">Descargar plantilla de productos</a>
+  <a href="../img/Payboom - plantilla de productos.xlsx" target="_blank">Descargar plantilla de productos</a>
   <!-- 
 <div class="container-fluid bg-grey">
   <div class="row">
@@ -240,6 +251,7 @@
         marca: null,
         precio: null,
         detalles: null,
+        stock: null,
         mensajes: [],
       },
       methods: {
@@ -250,6 +262,7 @@
               marca: this.marca,
               precio: this.precio,
               detalles: this.detalles,
+              stock: this.stock,
 
             })
             .then((data) => {
@@ -258,6 +271,7 @@
               this.marca = '';
               this.precio = '';
               this.detalles = '';
+              this.stock = '';
 
               console.log(data.key);
             });
@@ -287,6 +301,7 @@
               marca: mensajes[key].marca,
               precio: mensajes[key].precio,
               detalles: mensajes[key].detalles,
+              stock: mensajes[key].stock,
               key: key,
             });
           }
@@ -311,8 +326,13 @@
             detalles: mensaje.target.innerHTML,
           });
         },
+        editarExistencia(mensaje, key) {
+          db.ref('/users/' + valor + '/' + key).update({
+            stock: mensaje.target.innerHTML,
+          });
+        },
         eliminarMensaje(key) {
-          if (confirm('seguro?'))
+          if (confirm('¿estás seguro de eliminar éste producto?'))
             db.ref('/users/' + valor + '/' + key).remove();
         }
       }

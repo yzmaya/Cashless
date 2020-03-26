@@ -48,7 +48,7 @@
   <br><br>
   <h1>Pega tu información</h1>
   <span>Copia y pega la información obtenida por tu archivo plantilla.xlsm, si no sabes como hacer da clic <a href="">aqui</a></span><br>
-  <span>Si aún no tienes tu plantilla.xlsm descargalo <a href="../img/plantilla.xlsm" target="_blank">aquí</a></span>
+  <span>Si aún no tienes tu plantilla.xlsm descargalo <a href="../img/Payboom - plantilla de productos.xlsx" target="_blank">aquí</a></span>
   <br>
   <!--
   <div class="col-12" id="imagenes">
@@ -58,7 +58,7 @@
 <p id="leyenda" style="display: none; color: green;">Tu archivo, se ha enviado exitosamente!</p>
 -->
 <h3>Pega la información obtenida por tu excel</h3>
-<textarea id="textarea">
+<textarea id="textarea" class="form-control" rows="8">
 
 </textarea><br>
 <button class="btn btn-success" onclick="json1()">Subir</button>
@@ -129,7 +129,7 @@ function json1(){
     //for(j=0;j=3;j++){
     //console.log('soyla iteracion' + i + arrayOfLines[i].split(','));
    // }
-   var algo = arrayOfLines[i].split(',');
+   var algo = arrayOfLines[i].split('-');
 
    //console.log(arrayOfLines[i].split(','));
 
